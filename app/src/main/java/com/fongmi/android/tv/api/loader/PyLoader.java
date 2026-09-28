@@ -39,7 +39,7 @@ public class PyLoader {
             try {
                 Spider spider = loader.spider(api);
                 spider.siteKey = key;
-                spider.init(App.get(), normalizeExt(ext));
+                spider.init(new App.SpiderContextWrapper(App.get()), normalizeExt(ext));
                 return spider;
             } catch (Throwable e) {
                 e.printStackTrace();
