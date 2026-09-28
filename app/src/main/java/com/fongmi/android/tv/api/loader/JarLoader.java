@@ -206,7 +206,7 @@ public class JarLoader {
                 }
                 Spider spider = (Spider) loader.loadClass("com.github.catvod.spider." + api.split("csp_")[1]).newInstance();
                 spider.siteKey = key;
-                spider.init(App.get(), ext);
+                spider.init(new App.SpiderContextWrapper(App.get()), ext);
                 SpiderDebug.log("jar-loader", "spider init done site=%s api=%s jar=%s class=%s cost=%sms", key, api, jaKey, spider.getClass().getName(), System.currentTimeMillis() - start);
                 return spider;
             } catch (Throwable e) {
