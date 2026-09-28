@@ -260,34 +260,21 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
         @Override
         public PackageManager getPackageManager() {
-            return new ProxyPackageManager(super.getPackageManager());
-        }
-
-        private static class ProxyPackageManager extends PackageManager {
-
-            private final PackageManager origin;
-
-            public ProxyPackageManager(PackageManager origin) {
-                this.origin = origin;
-            }
-
-            @Override
-            public ApplicationInfo getApplicationInfo(String packageName, int flags) throws NameNotFoundException {
-                ApplicationInfo info = origin.getApplicationInfo(packageName, flags);
-                info.nonLocalizedLabel = ORIGIN_APP_NAME;
-                info.labelRes = 0;
-                return info;
-            }
-
-            @Override
-            public CharSequence getApplicationLabel(ApplicationInfo info) {
-                return ORIGIN_APP_NAME;
-            }
-
-            @Override
-            public CharSequence getApplicationLabel(String packageName) throws NameNotFoundException {
-                return ORIGIN_APP_NAME;
-            }
+            final PackageManager origin = super.getPackageManager();
+            return (PackageManager) java.lang.reflect.Proxy.newProxyInstance(
+                    PackageManager.class.getClassLoader(),
+                    new Class<?>[]{PackageManager.class},
+                    (proxy, method, args) -> {
+                        if ("getApplicationInfo".equals(method.getName()) && args != null && args.length == 2) {
+                            ApplicationInfo info = (ApplicationInfo) method.invoke(origin, args);
+                            if (info != null) {
+                                info.nonLocalizedLabel = ORIGIN_APP_NAME;
+                                info.labelRes = 0;
+                            }
+                            return info;
+                        }
+                        return method.invoke(origin, args);
+                    });
         }
     }
 }
