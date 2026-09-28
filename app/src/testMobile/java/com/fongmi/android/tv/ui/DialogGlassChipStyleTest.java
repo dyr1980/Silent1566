@@ -28,8 +28,8 @@ public class DialogGlassChipStyleTest {
                         && active.contains("android:color=\"#F2FFFFFF\""));
         assertTrue("active chips must include the blue-gray lower focus edge",
                 active.contains("android:color=\"#6B6F9F\""));
-        assertEquals("checked, activated, selected and focused text must all become dark",
-                4, occurrences(text, "android:color=\"#FF17171B\""));
+        assertEquals("checked, activated, selected and focused text must all use the semantic onSurface role",
+                6, occurrences(text, "android:color=\"?attr/colorOnSurface\""));
         assertTrue("subtitle rows must use the shared chip background and text selectors",
                 usesSharedSelectors(track));
         assertTrue("title rows must use the shared chip background and text selectors",

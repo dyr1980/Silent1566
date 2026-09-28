@@ -11,6 +11,6 @@
     android:minWidth="64dp"
     android:paddingHorizontal="12dp"
     android:singleLine="true"
-    android:textColor="@color/selector_video_text"
+    android:textColor="?attr/colorOnSurface"
     android:textSize="14sp"
     tools:text="1-40" />

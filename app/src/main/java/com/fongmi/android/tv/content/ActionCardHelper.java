@@ -14,9 +14,9 @@ import androidx.appcompat.app.AlertDialog;
 import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.api.config.VodConfig;
 import com.fongmi.android.tv.bean.Site;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.web.GameWebActivity;
 import com.github.catvod.net.OkHttp;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -180,7 +180,7 @@ public final class ActionCardHelper {
         if (!TextUtils.isEmpty(value)) edit.setText(value);
         if (!TextUtils.isEmpty(tip)) edit.setHint(tip.replace("\\n", "\n"));
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity)
                 .setTitle(title)
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, null)
@@ -216,7 +216,7 @@ public final class ActionCardHelper {
             if (!TextUtils.isEmpty(remarks)) sb.append("\n").append(remarks);
         }
         if (sb.length() == 0) sb.append("操作完成");
-        new MaterialAlertDialogBuilder(activity)
+        new WebHtvAlertDialogBuilder(activity)
                 .setTitle("执行结果")
                 .setMessage(sb.toString())
                 .setPositiveButton(android.R.string.ok, null)

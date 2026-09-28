@@ -62,6 +62,7 @@ import com.fongmi.android.tv.gitcloud.drive.JGitDriveEngine;
 import com.fongmi.android.tv.gitcloud.provider.GitCloudProvider;
 import com.fongmi.android.tv.gitcloud.provider.GitCloudProviders;
 import com.fongmi.android.tv.gitcloud.secure.GitCloudTokenStore;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.custom.SafeScrollEditText;
 import com.fongmi.android.tv.ui.custom.SettingClipboardOverlay;
 import com.fongmi.android.tv.utils.AppBackup;
@@ -168,7 +169,7 @@ public class GitCloudDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override

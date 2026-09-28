@@ -71,13 +71,19 @@ public class TouchOptimizationHelperSourceTest {
     public void activityAppliesOptimizationToNewContentAndRegistersFragmentsEarly() throws Exception {
         String source = read("app/src/leanback/java/com/fongmi/android/tv/ui/base/BaseActivity.java");
         int register = source.indexOf("registerFragmentLifecycleCallbacks();");
-        int content = source.indexOf("setContentView(getBinding().getRoot());");
+        // The activity resolves one inflated binding and passes that instance to
+        // setContentView (see "keep one inflated binding per activity"), so the
+        // ordering contract is expressed through the local `content` variable.
+        int content = source.indexOf("View content = getBinding().getRoot();");
+        int setContent = source.indexOf("setContentView(content);", content);
         int method = source.indexOf("public void setContentView(View view)");
         int methodEnd = source.indexOf("protected FragmentActivity getActivity()", method);
         int wall = source.indexOf("addCustomWall();", method);
         int sync = source.indexOf("TouchOptimizationHelper.sync(getWindow().getDecorView());", method);
 
         assertTrue(register >= 0 && content >= 0 && register < content);
+        assertTrue("the resolved binding must be the instance handed to setContentView",
+                setContent > content && setContent < method);
         assertTrue(method >= 0 && methodEnd > method);
         assertTrue(method < wall && wall < sync && sync < methodEnd);
     }

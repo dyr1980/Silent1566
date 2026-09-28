@@ -46,6 +46,7 @@ import com.fongmi.android.tv.bean.Vod;
 import com.fongmi.android.tv.databinding.ActivityTmdbPersonBinding;
 import com.fongmi.android.tv.service.TmdbService;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.adapter.TmdbPersonPhotoAdapter;
 import com.fongmi.android.tv.ui.adapter.TmdbWorkAdapter;
 import com.fongmi.android.tv.ui.base.BaseActivity;
@@ -57,7 +58,6 @@ import com.fongmi.android.tv.utils.Task;
 import com.fongmi.android.tv.utils.TmdbImageSaver;
 import com.fongmi.android.tv.utils.Util;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -838,7 +838,7 @@ public class TmdbPersonActivity extends BaseActivity {
     }
 
     private void showPhotoActionDialog(String url) {
-        new MaterialAlertDialogBuilder(this)
+        new WebHtvAlertDialogBuilder(this)
                 .setItems(new CharSequence[]{getString(R.string.detail_image_save)}, (dialog, which) -> savePhoto(url, null))
                 .show();
     }

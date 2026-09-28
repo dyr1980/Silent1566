@@ -22,6 +22,7 @@ import com.fongmi.android.tv.api.config.WallConfig;
 import com.fongmi.android.tv.bean.Config;
 import com.fongmi.android.tv.databinding.DialogHistoryBinding;
 import com.fongmi.android.tv.impl.ConfigListener;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.adapter.ConfigAdapter;
 import com.fongmi.android.tv.ui.custom.SpaceItemDecoration;
 import com.fongmi.android.tv.utils.Notify;
@@ -93,7 +94,7 @@ public class HistoryDialog extends BaseAlertDialog implements ConfigAdapter.OnCl
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override
@@ -169,7 +170,7 @@ public class HistoryDialog extends BaseAlertDialog implements ConfigAdapter.OnCl
             Notify.show(R.string.config_current_delete_message);
             return;
         }
-        new MaterialAlertDialogBuilder(requireContext())
+        new WebHtvAlertDialogBuilder(requireContext())
                 .setTitle(R.string.config_delete_title)
                 .setMessage(getString(R.string.config_delete_message, item.getDesc()))
                 .setNegativeButton(R.string.dialog_negative, null)

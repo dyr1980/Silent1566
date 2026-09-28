@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/update_title"
-            android:textColor="#202124"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:nextFocusDown="@id/stableItem"
             android:padding="10dp"
             android:src="@drawable/ic_dialog_close"
-            app:tint="#5F6368" />
+            app:tint="?attr/colorOnSurfaceVariant" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="@string/update_hint"
-        android:textColor="#5F6368"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="14sp" />
 
     <androidx.core.widget.NestedScrollView
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/update_channel_stable"
-                        android:textColor="#202124"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                         android:paddingTop="5dp"
                         android:paddingEnd="9dp"
                         android:paddingBottom="5dp"
-                        android:textColor="#174EA6"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="13sp"
                         tools:text="可更新" />
 
@@ -115,7 +115,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:textColor="#174EA6"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="14sp"
                         tools:text="收起" />
 
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:maxLines="2"
-                    android:textColor="#5F6368"
+                    android:textColor="?attr/colorOnSurfaceVariant"
                     android:textSize="14sp"
                     tools:text="5.6.0-202608101200" />
 
@@ -144,7 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="3dp"
-                        android:textColor="#303134"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         tools:text="### 更新内容&#10;&#10;- 稳定版更新说明" />
 
@@ -193,7 +193,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/update_channel_beta"
-                        android:textColor="#202124"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -208,7 +208,7 @@
                         android:paddingTop="5dp"
                         android:paddingEnd="9dp"
                         android:paddingBottom="5dp"
-                        android:textColor="#174EA6"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="13sp"
                         tools:text="可更新" />
 
@@ -219,7 +219,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:textColor="#174EA6"
+                        android:textColor="?attr/colorPrimary"
                         android:textSize="14sp"
                         tools:text="展开" />
 
@@ -231,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:maxLines="2"
-                    android:textColor="#5F6368"
+                    android:textColor="?attr/colorOnSurfaceVariant"
                     android:textSize="14sp"
                     tools:text="5.6.0-beta-202608101200" />
 
@@ -248,7 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="3dp"
-                        android:textColor="#303134"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         tools:text="### 更新内容&#10;&#10;- 测试版更新说明" />
 
@@ -290,7 +290,7 @@
             android:id="@+id/progressText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#5F6368"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="14sp"
             tools:text="正在下载 46% · 3.2 MB/s · 已用 00:12" />
 

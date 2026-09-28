@@ -8,6 +8,7 @@ import androidx.leanback.widget.Presenter;
 
 import com.fongmi.android.tv.bean.TmdbVideo;
 import com.fongmi.android.tv.databinding.AdapterTmdbVideoBinding;
+import com.fongmi.android.tv.theme.ThemeController;
 import com.fongmi.android.tv.utils.ImgUtil;
 import com.fongmi.android.tv.utils.ResUtil;
 
@@ -43,7 +44,9 @@ public class TmdbVideoPresenter extends Presenter {
             float scale = focused ? 1.04f : 1.0f;
             view.animate().scaleX(scale).scaleY(scale).setDuration(120).start();
             holder.binding.getRoot().setStrokeWidth(ResUtil.dp2px(focused ? 2 : 1));
-            holder.binding.getRoot().setStrokeColor(focused ? 0xFFFFD166 : 0x33FFFFFF);
+            holder.binding.getRoot().setStrokeColor(focused
+                    ? ThemeController.current().colorPlayerControlActive()
+                    : ThemeController.current().colorOutlineVariant());
         });
     }
 

@@ -33,7 +33,7 @@ public final class UpdateSettingsDialog {
     }
 
     public static void show(FragmentActivity activity) {
-        Dialog dialog = new Dialog(activity, R.style.Theme_WebHTV_LightDialog);
+        Dialog dialog = new Dialog(activity, R.style.Theme_WebHTV_Dialog);
         DialogUpdateSettingsBinding binding = DialogUpdateSettingsBinding.inflate(LayoutInflater.from(dialog.getContext()));
         State state = State.load();
         dialog.setContentView(binding.getRoot());

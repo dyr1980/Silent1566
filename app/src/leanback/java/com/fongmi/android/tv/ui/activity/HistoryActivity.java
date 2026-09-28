@@ -16,6 +16,7 @@ import com.fongmi.android.tv.databinding.ActivityHistoryBinding;
 import com.fongmi.android.tv.event.ConfigEvent;
 import com.fongmi.android.tv.event.RefreshEvent;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.adapter.HistoryAdapter;
 import com.fongmi.android.tv.ui.base.BaseActivity;
 import com.fongmi.android.tv.ui.custom.FocusRestorer;
@@ -56,7 +57,7 @@ public class HistoryActivity extends BaseActivity implements HistoryAdapter.OnCl
 
     private void onDelete() {
         if (mAdapter.isDelete()) {
-            new androidx.appcompat.app.AlertDialog.Builder(this)
+            new WebHtvAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_delete_record)
                 .setMessage(Setting.isGlobalHistoryEnabled() ? R.string.dialog_delete_global_history : R.string.dialog_delete_history)
                 .setNegativeButton(R.string.dialog_negative, null)

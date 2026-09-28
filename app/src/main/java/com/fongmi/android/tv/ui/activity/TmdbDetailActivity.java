@@ -120,6 +120,7 @@ import com.fongmi.android.tv.following.FollowingUpdatePolicy;
 import com.fongmi.android.tv.event.ConfigEvent;
 import com.fongmi.android.tv.setting.DetailRuntimeModePolicy;
 import com.fongmi.android.tv.setting.TmdbSourceState;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.detail.DetailModeHost;
 import com.fongmi.android.tv.ui.detail.EnhancedDetailController;
 import com.fongmi.android.tv.ui.detail.FusionDetailController;
@@ -243,7 +244,6 @@ import com.fongmi.android.tv.web.WebHomeInlineVodStore;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -4214,16 +4214,6 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
         return getIntent().getIntExtra("detail_mode", Setting.getDetailOpenMode()) == Setting.DETAIL_OPEN_CINEMA || Setting.isTmdbCinemaStyle();
     }
 
-    @Override
-    protected boolean applyGlobalTheme() {
-        return !isCinemaStyle();
-    }
-
-    @Override
-    protected boolean preserveDetailThemeState() {
-        return isCinemaStyle();
-    }
-
     private ThemeColors currentThemeColors() {
         ThemeColors colors = lightTheme ? ThemeColors.light() : ThemeColors.dark();
         return isCinemaStyle() ? ThemeColors.cinema(lightTheme) : colors;
@@ -6745,7 +6735,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
      */
     private void showMovieDialog(Episode episode) {
         DialogTmdbEpisodeBinding dialogBinding = DialogTmdbEpisodeBinding.inflate(getLayoutInflater());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this).setView(dialogBinding.getRoot()).create();
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this).setView(dialogBinding.getRoot()).create();
         ThemeColors colors = lightTheme ? ThemeColors.light() : ThemeColors.dark();
         dialogBinding.panel.setCardBackgroundColor(colors.panel);
         dialogBinding.panel.setStrokeColor(colors.line);
@@ -6860,7 +6850,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
 
     private void showTmdbEpisodeDialog(Episode episode, int episodeNumber, JsonObject detail, List<String> photos, List<TmdbPerson> guests) {
         DialogTmdbEpisodeBinding dialogBinding = DialogTmdbEpisodeBinding.inflate(getLayoutInflater());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this).setView(dialogBinding.getRoot()).create();
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this).setView(dialogBinding.getRoot()).create();
         ThemeColors colors = lightTheme ? ThemeColors.light() : ThemeColors.dark();
         dialogBinding.panel.setCardBackgroundColor(colors.panel);
         dialogBinding.panel.setStrokeColor(colors.line);
@@ -7153,7 +7143,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
     }
 
     private void showPhotoActionDialog(String url) {
-        new MaterialAlertDialogBuilder(this)
+        new WebHtvAlertDialogBuilder(this)
                 .setItems(new CharSequence[]{getString(R.string.detail_image_save)}, (dialog, which) -> savePhoto(url, null))
                 .show();
     }
@@ -8389,7 +8379,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
 
     protected void onInlineInfo() {
         if (!hasInlineInfo()) return;
-        new MaterialAlertDialogBuilder(this)
+        new WebHtvAlertDialogBuilder(this)
                 .setTitle(inlineTitleText())
                 .setMessage(buildInlineInfoText())
                 .setPositiveButton(R.string.dialog_positive, null)
@@ -8517,7 +8507,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
         int count = currentInlineResult.getUrl().getValues().size();
         String[] labels = new String[count];
         for (int i = 0; i < count; i++) labels[i] = inlineQualityName(i);
-        new MaterialAlertDialogBuilder(this)
+        new WebHtvAlertDialogBuilder(this)
                 .setTitle(R.string.detail_quality)
                 .setSingleChoiceItems(labels, currentInlineResult.getUrl().getPosition(), (dialog, which) -> {
                     dialog.dismiss();
@@ -8941,7 +8931,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
         String[] kernels = PlayerKernelDialog.kernels(getResources());
         String[] items = Arrays.copyOf(kernels, kernels.length + 1);
         items[kernels.length] = getString(R.string.player_kernel_external);
-        new MaterialAlertDialogBuilder(this).setItems(items, (dialog, which) -> onInlinePlayerChoice(kernels, which)).show();
+        new WebHtvAlertDialogBuilder(this).setItems(items, (dialog, which) -> onInlinePlayerChoice(kernels, which)).show();
         return true;
     }
 
@@ -9387,7 +9377,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
             showPage.accept(pageIndex[0], true);
         });
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this)
                 .setView(content)
                 .create();
         holder[0] = dialog;
@@ -9569,7 +9559,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
             showPage.accept(selectedPage, true);
         };
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this).setView(scroll).create();
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this).setView(scroll).create();
         panel.setTag(dialog);
         dialog.setOnShowListener(value -> render[0].run());
         if (!canTouchUi()) return;
@@ -11459,7 +11449,7 @@ public class TmdbDetailActivity extends PlaybackActivity implements TrackDialog.
         introSkipPlayback.setSkipConfirmListener((segment, action) -> {
             if (isFinishing() || isDestroyed()) return false;
             if (introSkipConfirmDialog != null && introSkipConfirmDialog.isShowing()) return false;
-            introSkipConfirmDialog = new MaterialAlertDialogBuilder(this)
+            introSkipConfirmDialog = new WebHtvAlertDialogBuilder(this)
                     .setTitle(R.string.intro_skip_confirm_title)
                     .setMessage(IntroSkipKinds.confirmMessage(segment))
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> action.run())

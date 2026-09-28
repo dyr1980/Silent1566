@@ -25,6 +25,7 @@ import com.fongmi.android.tv.api.config.VodConfig;
 import com.fongmi.android.tv.bean.Site;
 import com.fongmi.android.tv.databinding.DialogWebHomeExtensionDebugBinding;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.fongmi.android.tv.web.HomeWebController;
@@ -75,7 +76,7 @@ public class WebHomeExtensionDebugDialog extends BaseAlertDialog implements Home
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override

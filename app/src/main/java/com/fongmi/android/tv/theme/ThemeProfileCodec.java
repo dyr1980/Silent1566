@@ -9,7 +9,7 @@ import com.google.gson.JsonParser;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-/** JSON codec with bounded input and no executable/ambiguous fields. */
+/** JSON codec for the bounded B-safe profile; rejects executable or oversized payloads. */
 public final class ThemeProfileCodec {
 
     private static final Gson GSON = new GsonBuilder().serializeNulls().create();
@@ -23,14 +23,33 @@ public final class ThemeProfileCodec {
         JsonElement root;
         try {
             root = JsonParser.parseString(json);
-        } catch (RuntimeException e) {
-            throw new IllegalArgumentException("theme JSON is invalid", e);
+        } catch (RuntimeException error) {
+            throw new IllegalArgumentException("theme JSON is invalid", error);
         }
         if (!root.isJsonObject()) throw new IllegalArgumentException("theme JSON must be an object");
         inspect(root, 0);
-        ThemeProfileValidator.Result result = ThemeProfileValidator.validate(GSON.fromJson(root, ThemeProfile.class));
+        ThemeProfile parsed;
+        try {
+            parsed = GSON.fromJson(root, ThemeProfile.class);
+        } catch (RuntimeException error) {
+            throw new IllegalArgumentException("theme JSON has an invalid field type", error);
+        }
+        if (parsed == null) throw new IllegalArgumentException("theme JSON must be an object");
+        applyMissingDefaults(parsed);
+        ThemeProfileValidator.Result result = ThemeProfileValidator.validate(parsed);
         if (!result.valid()) throw new IllegalArgumentException(result.message());
         return result.profile();
+    }
+
+    /**
+     * Gson allocates without running field initializers, so absent keys arrive as
+     * null/0. Bounded defaults keep an old or partial payload loadable.
+     */
+    static void applyMissingDefaults(ThemeProfile profile) {
+        if (profile.format == null) profile.format = ThemeProfile.FORMAT;
+        if (profile.schemaVersion == 0) profile.schemaVersion = ThemeProfile.SCHEMA_VERSION;
+        if (profile.light == null) profile.light = new ThemeProfile.SlotSet();
+        if (profile.dark == null) profile.dark = new ThemeProfile.SlotSet();
     }
 
     public static String encode(ThemeProfile profile) {
@@ -39,11 +58,6 @@ public final class ThemeProfileCodec {
         return GSON.toJson(result.profile());
     }
 
-    /**
-     * Bounds raw imported JSON before Gson builds a recursive tree. This keeps the
-     * nesting limit effective for pasted/downloaded input instead of discovering it
-     * only after a deeply nested payload has already been parsed.
-     */
     static void validateJsonBounds(String json) {
         if (json.getBytes(StandardCharsets.UTF_8).length > ThemeProfileValidator.MAX_JSON_BYTES) {
             throw new IllegalArgumentException("theme JSON is too large");
@@ -51,25 +65,24 @@ public final class ThemeProfileCodec {
         int depth = 0;
         boolean quoted = false;
         boolean escaped = false;
-        for (int i = 0; i < json.length(); i++) {
-            char current = json.charAt(i);
+        for (int index = 0; index < json.length(); index++) {
+            char current = json.charAt(index);
             if (quoted) {
                 if (escaped) escaped = false;
                 else if (current == '\\') escaped = true;
                 else if (current == '"') quoted = false;
                 continue;
             }
-            if (current == '"') {
-                quoted = true;
-            } else if (current == '{' || current == '[') {
+            if (current == '"') quoted = true;
+            else if (current == '{' || current == '[') {
                 if (++depth > ThemeProfileValidator.MAX_NESTING_DEPTH) {
                     throw new IllegalArgumentException("theme JSON is too deeply nested");
                 }
             } else if (current == '}' || current == ']') {
-                depth--;
-                if (depth < 0) throw new IllegalArgumentException("theme JSON is invalid");
+                if (--depth < 0) throw new IllegalArgumentException("theme JSON is invalid");
             }
         }
+        if (quoted || depth != 0) throw new IllegalArgumentException("theme JSON is invalid");
     }
 
     private static void inspect(JsonElement element, int depth) {

@@ -30,6 +30,7 @@ import com.fongmi.android.tv.playback.PlaybackRemoteSyncResult;
 import com.fongmi.android.tv.playback.PlaybackRemoteSyncStore;
 import com.fongmi.android.tv.playback.PlaybackRemoteSyncer;
 import com.fongmi.android.tv.playback.RemoteSyncConfig;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.custom.CustomTextListener;
 import com.fongmi.android.tv.utils.Formatters;
 import com.fongmi.android.tv.utils.Notify;
@@ -66,7 +67,7 @@ public class PlaybackRemoteSyncDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override

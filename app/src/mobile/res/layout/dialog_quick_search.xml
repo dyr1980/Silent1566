@@ -25,7 +25,7 @@
             android:ellipsize="end"
             android:gravity="start|center_vertical"
             android:maxLines="1"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="17sp"
             android:textStyle="bold"
             tools:text="快搜 “仙逆”" />
@@ -56,8 +56,8 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white_50"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
             android:textSize="15sp" />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -77,7 +77,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#12FFFFFF" />
+        android:background="@color/webhtv_color_overlay_light" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             android:gravity="center"
             android:paddingHorizontal="24dp"
             android:text="@string/error_empty"
-            android:textColor="@color/white_70"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="14sp"
             android:visibility="gone"
             tools:visibility="visible" />

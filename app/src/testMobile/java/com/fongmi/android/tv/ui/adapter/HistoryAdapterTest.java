@@ -99,7 +99,7 @@ public class HistoryAdapterTest {
                         && "@+id/image".equals(androidAttribute(delete, "layout_alignEnd"))
                         && "@+id/history_info".equals(androidAttribute(delete, "layout_alignBottom")));
         assertTrue("mobile delete overlay must dim the card and center the full white trash icon",
-                "@color/black_50".equals(androidAttribute(delete, "background"))
+                "@color/webhtv_color_player_scrim".equals(androidAttribute(delete, "background"))
                         && "center".equals(androidAttribute(delete, "scaleType"))
                         && "@drawable/ic_vod_delete".equals(androidAttribute(delete, "src"))
                         && "@style/Vod.Grid.Large".equals(delete.getAttributeNS(APP_NS, "shapeAppearanceOverlay")));

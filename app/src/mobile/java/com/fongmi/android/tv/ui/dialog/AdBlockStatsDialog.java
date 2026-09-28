@@ -21,10 +21,10 @@ import com.fongmi.android.tv.bean.RuleHitRecord;
 import com.fongmi.android.tv.databinding.AdapterAdBlockLogBinding;
 import com.fongmi.android.tv.databinding.DialogAdBlockStatsBinding;
 import com.fongmi.android.tv.impl.Callback;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.AdBlockTimeFormatter;
 import com.fongmi.android.tv.widget.AdBlockChartView;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class AdBlockStatsDialog {
     private AdBlockStatsDialog(Activity activity) {
         this.activity = activity;
         this.binding = DialogAdBlockStatsBinding.inflate(LayoutInflater.from(activity));
-        this.dialog = new MaterialAlertDialogBuilder(activity)
+        this.dialog = new WebHtvAlertDialogBuilder(activity)
                 .setView(binding.getRoot())
                 .create();
     }
@@ -347,7 +347,7 @@ public class AdBlockStatsDialog {
     }
 
     private void onReset() {
-        new MaterialAlertDialogBuilder(activity)
+        new WebHtvAlertDialogBuilder(activity)
                 .setTitle(R.string.ad_stats_reset)
                 .setMessage(R.string.ad_stats_reset_confirm)
                 .setPositiveButton(android.R.string.ok, (d, which) -> {

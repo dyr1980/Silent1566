@@ -26,10 +26,10 @@ import com.fongmi.android.tv.App;
 import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.databinding.ActivityLabBinding;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.PermissionUtil;
 import com.fongmi.android.tv.utils.Util;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.io.File;
@@ -222,7 +222,7 @@ public class LabActivity extends AppCompatActivity implements LabPackageAdapter.
     }
 
     private void showAbout() {
-        new MaterialAlertDialogBuilder(this, R.style.Theme_App_Lab_DayNight_Dialog)
+        new WebHtvAlertDialogBuilder(this, R.style.Theme_App_Lab_DayNight_Dialog)
                 .setTitle(R.string.lab_about_title)
                 .setMessage(R.string.lab_about_message)
                 .setPositiveButton(android.R.string.ok, null)
@@ -261,7 +261,7 @@ public class LabActivity extends AppCompatActivity implements LabPackageAdapter.
         select.setPadding(0, pad, 0, 0);
         select.setClickable(true);
         container.addView(select);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_App_Lab_DayNight_Dialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this, R.style.Theme_App_Lab_DayNight_Dialog)
                 .setTitle(R.string.lab_import_title)
                 .setView(container)
                 .setNegativeButton(android.R.string.cancel, null)
@@ -379,7 +379,7 @@ public class LabActivity extends AppCompatActivity implements LabPackageAdapter.
         proxy.setChecked(LabConfig.get().getGlobalProxy());
         proxyPort.setText(String.valueOf(LabConfig.get().getGlobalProxyPort()));
         proxyNoProxy.setText(LabConfig.get().getGlobalProxyNoProxy());
-        settingsDialog = new MaterialAlertDialogBuilder(this, R.style.Theme_App_Lab_DayNight_Dialog)
+        settingsDialog = new WebHtvAlertDialogBuilder(this, R.style.Theme_App_Lab_DayNight_Dialog)
                 .setTitle(R.string.lab_source_title)
                 .setView(root)
                 .setNegativeButton(android.R.string.cancel, null)

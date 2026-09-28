@@ -90,7 +90,7 @@
             android:textColor="@color/dialog_primary_button_text"
             android:textSize="20sp"
             app:backgroundTint="@color/dialog_primary_button_bg"
-            app:strokeColor="@color/dialog_outlined_button_stroke"
+            app:strokeColor="?attr/colorOutline"
             app:strokeWidth="2dp" />
 
     </LinearLayout>

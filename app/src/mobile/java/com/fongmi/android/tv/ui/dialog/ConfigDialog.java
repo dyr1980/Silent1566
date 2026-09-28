@@ -25,6 +25,7 @@ import com.fongmi.android.tv.bean.Config;
 import com.fongmi.android.tv.db.AppDatabase;
 import com.fongmi.android.tv.databinding.DialogConfigBinding;
 import com.fongmi.android.tv.impl.ConfigListener;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.playback.PlaybackIdentityResolver;
 import com.fongmi.android.tv.ui.custom.CustomTextListener;
 import com.fongmi.android.tv.utils.FileChooser;
@@ -92,7 +93,7 @@ public class ConfigDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override

@@ -73,6 +73,7 @@ import com.fongmi.android.tv.bean.Danmaku;
 import com.fongmi.android.tv.bean.Episode;
 import com.fongmi.android.tv.bean.EpisodePositionCache;
 import com.fongmi.android.tv.bean.Flag;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.helper.EpisodeSeasonSnapshot;
 import com.fongmi.android.tv.bean.History;
 import com.fongmi.android.tv.bean.Keep;
@@ -1492,11 +1493,6 @@ private final Task.Scope mPersonalRecommendationTasks = new Task.Scope(Task.reco
         syncShortDramaGesture();
         setOrient();
         checkId();
-    }
-
-    @Override
-    protected boolean applyGlobalTheme() {
-        return false;
     }
 
     @Override
@@ -4813,7 +4809,7 @@ private final Task.Scope mPersonalRecommendationTasks = new Task.Scope(Task.reco
         if (result == null || isFinishing() || isDestroyed()) return;
         if (mKaraokeResultDialog != null && mKaraokeResultDialog.isShowing()) return;
         KaraokeResultView view = new KaraokeResultView(this).setResult(result);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_WebHTV_LightDialog).setView(view).create();
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this, R.style.ThemeOverlay_WebHTV_Dialog).setView(view).create();
         view.setAction(() -> {
             dialog.dismiss();
             completeKaraokeResult(action);

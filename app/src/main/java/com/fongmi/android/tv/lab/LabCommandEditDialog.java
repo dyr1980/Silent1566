@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.fongmi.android.tv.R;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
@@ -57,7 +58,7 @@ public final class LabCommandEditDialog {
             }
         }
 
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.Theme_App_Lab_Dialog)
+        MaterialAlertDialogBuilder builder = new WebHtvAlertDialogBuilder(activity, R.style.Theme_App_Lab_Dialog)
                 .setTitle(editing ? "编辑命令" : "新建命令")
                 .setView(root)
                 .setNegativeButton("取消", null)

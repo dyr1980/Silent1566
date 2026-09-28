@@ -16,6 +16,7 @@ import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.bean.Update;
 import com.fongmi.android.tv.databinding.DialogUpdateBinding;
 import com.fongmi.android.tv.impl.UpdateListener;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.AppVersion;
 import com.fongmi.android.tv.utils.FileUtil;
 import com.fongmi.android.tv.utils.MarkdownText;
@@ -75,7 +76,7 @@ public class UpdateDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog_NoInset).setView(getBinding().getRoot()).setCancelable(false);
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog_NoInset).setView(getBinding().getRoot()).setCancelable(false);
     }
 
     @Override

@@ -24,14 +24,14 @@
         android:minHeight="52dp"
         android:overScrollMode="never"
         app:tabGravity="fill"
-        app:tabIndicatorColor="#1A73E8"
+        app:tabIndicatorColor="?attr/colorPrimary"
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
         app:tabRippleColor="@android:color/transparent"
-        app:tabSelectedTextColor="#1A73E8"
+        app:tabSelectedTextColor="?attr/colorPrimary"
         app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Button"
-        app:tabTextColor="#5F6368" />
+        app:tabTextColor="?attr/colorOnSurfaceVariant" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/ad_block_total"
-                            android:textColor="#5F6368"
+                            android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -113,7 +113,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/ad_feedback_count"
-                            android:textColor="#5F6368"
+                            android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -137,7 +137,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/ad_ai_success_rate"
-                            android:textColor="#5F6368"
+                            android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -146,7 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/black_10" />
+                    android:background="@color/webhtv_color_scrim" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/ad_site_count"
-                            android:textColor="#5F6368"
+                            android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -209,7 +209,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/ad_top_site"
-                            android:textColor="#5F6368"
+                            android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -232,7 +232,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/ad_top_site_share"
-                            android:textColor="#5F6368"
+                            android:textColor="?attr/colorOnSurfaceVariant"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -251,7 +251,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ad_stats_empty"
-                android:textColor="#5F6368"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="15sp"
                 android:visibility="gone" />
             <androidx.recyclerview.widget.RecyclerView
@@ -275,7 +275,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ad_stats_empty"
-                android:textColor="#5F6368"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="15sp"
                 android:visibility="gone" />
             <androidx.recyclerview.widget.RecyclerView
@@ -299,7 +299,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ad_stats_empty"
-                android:textColor="#5F6368"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="15sp"
                 android:visibility="gone" />
             <androidx.recyclerview.widget.RecyclerView
@@ -323,7 +323,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ad_stats_empty"
-                android:textColor="#5F6368"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="15sp"
                 android:visibility="gone" />
             <HorizontalScrollView
@@ -342,7 +342,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="88dp"
-            android:background="@color/black_10"
+            android:background="@color/webhtv_color_scrim"
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -363,7 +363,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/siteFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -399,7 +399,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/siteDomainFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -435,7 +435,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/vodFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -471,7 +471,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/lineFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -507,7 +507,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/episodeFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -543,7 +543,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/ruleFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -579,7 +579,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/adDomainFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -626,7 +626,7 @@
                     android:paddingEnd="6dp"
                     android:singleLine="true"
                     android:textColor="@color/dialog_outlined_button_text"
-                    android:textColorHint="#80868B"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
                     android:textSize="12sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -658,7 +658,7 @@
                     android:paddingEnd="6dp"
                     android:singleLine="true"
                     android:textColor="@color/dialog_outlined_button_text"
-                    android:textColorHint="#80868B"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
                     android:textSize="12sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -690,7 +690,7 @@
                     android:paddingEnd="6dp"
                     android:singleLine="true"
                     android:textColor="@color/dialog_outlined_button_text"
-                    android:textColorHint="#80868B"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
                     android:textSize="12sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -722,7 +722,7 @@
                     android:paddingEnd="6dp"
                     android:singleLine="true"
                     android:textColor="@color/dialog_outlined_button_text"
-                    android:textColorHint="#80868B"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
                     android:textSize="12sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -743,7 +743,7 @@
                     android:textStyle="bold" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/pipelineFilter"
-                    style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+                    style="@style/Widget.WebHTV.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:ellipsize="end"
@@ -786,7 +786,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ad_stats_empty"
-                android:textColor="#5F6368"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="15sp"
                 android:visibility="gone" />
             <com.fongmi.android.tv.widget.AdBlockChartView
@@ -802,7 +802,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/black_10" />
+        android:background="@color/webhtv_color_scrim" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -812,7 +812,7 @@
         android:orientation="horizontal">
         <com.google.android.material.button.MaterialButton
             android:id="@+id/reset"
-            style="@style/Widget.WebHTV.LightDialog.Button.Outlined"
+            style="@style/Widget.WebHTV.Button.Outlined"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginEnd="12dp"

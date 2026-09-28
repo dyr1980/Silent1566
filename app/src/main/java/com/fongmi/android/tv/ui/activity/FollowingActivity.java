@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -38,13 +39,15 @@ import com.fongmi.android.tv.following.FollowingStore;
 import com.fongmi.android.tv.following.FollowingUpdateCoordinator;
 import com.fongmi.android.tv.following.FollowingUpdatePolicy;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.ThemeController;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.adapter.FollowingAdapter;
+import com.fongmi.android.tv.ui.custom.CustomWallView;
 import com.fongmi.android.tv.ui.custom.SpaceItemDecoration;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.PermissionUtil;
 import com.fongmi.android.tv.utils.Task;
 import com.fongmi.android.tv.utils.Util;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -102,6 +105,10 @@ public class FollowingActivity extends AppCompatActivity implements FollowingAda
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.Theme_App);
         super.onCreate(savedInstanceState);
+        // This page predates the shared BaseActivity, so it must opt into the same
+        // appearance contract by hand: resolve the persisted tokens before the first
+        // content view, then bind the tree once it exists and again after initView().
+        ThemeController.applyFromPreferences(this);
         if (!FollowingSettings.isEnabled()) {
             Notify.show(R.string.following_enabled_hint);
             finish();
@@ -109,11 +116,25 @@ public class FollowingActivity extends AppCompatActivity implements FollowingAda
         }
         binding = ActivityFollowingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        ThemeController.bindTheme(binding.getRoot());
+        addWallpaper();
         focusIdentity = getIntent().getStringExtra(EXTRA_IDENTITY_KEY);
         FollowingNotifier.createChannel();
         FollowingScheduler.ensurePeriodic(this);
         initView();
+        ThemeController.bindTheme(binding.getRoot());
         FollowingScheduler.enqueueDueNow(this);
+    }
+
+    /**
+     * 与其它内容页保持一致：全局壁纸作为页面背景，壁纸视图插在内容根视图之下。
+     * 页面根布局保持透明，顶栏与卡片用半透明面板承载文字，动效跟随全局壁纸设置。
+     */
+    private void addWallpaper() {
+        ViewGroup content = findViewById(android.R.id.content);
+        if (content == null || content.getChildCount() == 0) return;
+        content.addView(new CustomWallView(this, null), 0,
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     private void initView() {
@@ -256,7 +277,7 @@ public class FollowingActivity extends AppCompatActivity implements FollowingAda
         token.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
         form.addView(url, new LinearLayout.LayoutParams(-1, -2));
         form.addView(token, new LinearLayout.LayoutParams(-1, -2));
-        new MaterialAlertDialogBuilder(this)
+        new WebHtvAlertDialogBuilder(this)
                 .setTitle(R.string.following_server_import)
                 .setView(form)
                 .setNegativeButton(R.string.dialog_negative, null)
@@ -322,7 +343,7 @@ public class FollowingActivity extends AppCompatActivity implements FollowingAda
             if (candidate.currentEpisodes > 0) message.append(" · E").append(candidate.currentEpisodes);
         }
         if (candidates.size() > limit) message.append("\n… +").append(candidates.size() - limit);
-        new MaterialAlertDialogBuilder(this)
+        new WebHtvAlertDialogBuilder(this)
                 .setTitle(R.string.following_server_preview_title)
                 .setMessage(message)
                 .setNegativeButton(R.string.dialog_negative, null)
@@ -364,7 +385,7 @@ public class FollowingActivity extends AppCompatActivity implements FollowingAda
                 getString(R.string.following_change_source),
                 getString(R.string.following_cancel)
         };
-        new MaterialAlertDialogBuilder(this)
+        new WebHtvAlertDialogBuilder(this)
                 .setTitle(item.vodName)
                 .setMessage(message)
                 .setNegativeButton(R.string.dialog_close, null)
@@ -514,7 +535,7 @@ public class FollowingActivity extends AppCompatActivity implements FollowingAda
 
     @Override
     public void onDelete(Following item) {
-        new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_WebHTV_FollowingConfirmDialog)
+        new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.following_delete_title)
                 .setMessage(R.string.following_delete_message)
                 .setNegativeButton(R.string.dialog_negative, null)

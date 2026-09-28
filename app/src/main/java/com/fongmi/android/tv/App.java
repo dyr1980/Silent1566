@@ -24,7 +24,6 @@ import com.fongmi.android.tv.remote.RemoteAgent;
 import com.fongmi.android.tv.setting.AppBranding;
 import com.fongmi.android.tv.setting.ProxySetting;
 import com.fongmi.android.tv.setting.Setting;
-import com.fongmi.android.tv.theme.ThemeProfileStore;
 import com.fongmi.android.tv.theme.ThemeController;
 import com.fongmi.android.tv.utils.DanmakuSearchListFocusFixer;
 import com.fongmi.android.tv.utils.NsdDeviceDiscovery;
@@ -118,8 +117,7 @@ public class App extends Application implements Application.ActivityLifecycleCal
         PlaybackMemoryMonitor.process().initialize(this);
         PlaybackSystemConditionMonitor.process().initialize(this);
         Setting.applyLanguage();
-        ThemeProfileStore.ensureMigrated();
-        ThemeController.applyNightMode(this);
+        ThemeController.applyNightModeToApp();
         AppBranding.applyLauncherIcon(this);
         DebugLogStore.restoreEnabled();
         if (DebugLogStore.isEnabled()) {

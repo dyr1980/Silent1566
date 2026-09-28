@@ -1,0 +1,58 @@
+<resources>
+    <attr name="webhtvColorPrimary" format="color" />
+    <attr name="webhtvColorOnPrimary" format="color" />
+    <attr name="webhtvColorPrimaryContainer" format="color" />
+    <attr name="webhtvColorOnPrimaryContainer" format="color" />
+    <attr name="webhtvColorSecondary" format="color" />
+    <attr name="webhtvColorOnSecondary" format="color" />
+    <attr name="webhtvColorSecondaryContainer" format="color" />
+    <attr name="webhtvColorOnSecondaryContainer" format="color" />
+    <attr name="webhtvColorTertiary" format="color" />
+    <attr name="webhtvColorOnTertiary" format="color" />
+    <attr name="webhtvColorError" format="color" />
+    <attr name="webhtvColorOnError" format="color" />
+    <attr name="webhtvColorErrorContainer" format="color" />
+    <attr name="webhtvColorOnErrorContainer" format="color" />
+    <attr name="webhtvColorSuccess" format="color" />
+    <attr name="webhtvColorOnSuccess" format="color" />
+    <attr name="webhtvColorSuccessContainer" format="color" />
+    <attr name="webhtvColorOnSuccessContainer" format="color" />
+    <attr name="webhtvColorWarning" format="color" />
+    <attr name="webhtvColorOnWarning" format="color" />
+    <attr name="webhtvColorWarningContainer" format="color" />
+    <attr name="webhtvColorOnWarningContainer" format="color" />
+    <attr name="webhtvColorSurface" format="color" />
+    <attr name="webhtvColorSurfaceDim" format="color" />
+    <attr name="webhtvColorSurfaceBright" format="color" />
+    <attr name="webhtvColorSurfaceContainerLowest" format="color" />
+    <attr name="webhtvColorSurfaceContainerLow" format="color" />
+    <attr name="webhtvColorSurfaceContainer" format="color" />
+    <attr name="webhtvColorSurfaceContainerHigh" format="color" />
+    <attr name="webhtvColorSurfaceContainerHighest" format="color" />
+    <attr name="webhtvColorOnSurface" format="color" />
+    <attr name="webhtvColorOnSurfaceVariant" format="color" />
+    <attr name="webhtvColorOutline" format="color" />
+    <attr name="webhtvColorOutlineVariant" format="color" />
+    <attr name="webhtvColorInverseSurface" format="color" />
+    <attr name="webhtvColorInverseOnSurface" format="color" />
+    <attr name="webhtvColorInversePrimary" format="color" />
+    <attr name="webhtvColorScrim" format="color" />
+    <attr name="webhtvColorShadow" format="color" />
+    <attr name="webhtvColorFocus" format="color" />
+    <attr name="webhtvColorPlayerControl" format="color" />
+    <attr name="webhtvColorPlayerControlMuted" format="color" />
+    <attr name="webhtvColorPlayerControlActive" format="color" />
+    <attr name="webhtvColorPlayerScrim" format="color" />
+    <attr name="webhtvColorHealthGood" format="color" />
+    <attr name="webhtvColorHealthWarn" format="color" />
+    <attr name="webhtvColorHealthBad" format="color" />
+    <attr name="webhtvColorOverlayLight" format="color" />
+    <attr name="webhtvColorOverlayDark" format="color" />
+    <!-- onSurface at 20/70/80/90% alpha for text and strokes drawn directly over video.
+         Declared here because the player overlay cannot rely on ?attr/colorOnSurface alpha,
+         and the alpha variants must stay tied to the onSurface token per light/dark mode. -->
+    <attr name="colorOnSurface_20" format="color" />
+    <attr name="colorOnSurface_70" format="color" />
+    <attr name="colorOnSurface_80" format="color" />
+    <attr name="colorOnSurface_90" format="color" />
+</resources>

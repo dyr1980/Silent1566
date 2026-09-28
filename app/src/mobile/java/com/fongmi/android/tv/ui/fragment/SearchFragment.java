@@ -39,6 +39,7 @@ import com.fongmi.android.tv.bean.Word;
 import com.fongmi.android.tv.databinding.FragmentSearchBinding;
 import com.fongmi.android.tv.impl.Callback;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.ThemeController;
 import com.fongmi.android.tv.setting.SiteGroupOrderStore;
 import com.fongmi.android.tv.ui.adapter.HotWordAdapter;
 import com.fongmi.android.tv.ui.adapter.RecordAdapter;
@@ -373,7 +374,7 @@ public class SearchFragment extends BaseFragment implements MenuProvider, WordAd
         view.setSingleLine(true);
         view.setGravity(Gravity.CENTER_VERTICAL);
         view.setIncludeFontPadding(false);
-        view.setTextColor(0xFF202124);
+        view.setTextColor(ThemeController.current().colorOnSurface());
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         view.setPadding(ResUtil.dp2px(18), 0, ResUtil.dp2px(18), 0);
         view.setBackgroundResource(getSelectableItemBackground());

@@ -80,7 +80,7 @@ final class PlaybackPerformanceModal {
     private static Shell createShell(
             Context context,
             CharSequence title) {
-        Dialog dialog = new Dialog(context, R.style.Theme_WebHTV_LightDialog);
+        Dialog dialog = new Dialog(context, R.style.Theme_WebHTV_Dialog);
         LinearLayout root = new LinearLayout(context);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setBackgroundResource(R.drawable.shape_shell_proxy_dialog);

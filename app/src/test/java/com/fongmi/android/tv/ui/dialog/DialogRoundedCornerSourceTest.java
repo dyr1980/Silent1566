@@ -45,13 +45,13 @@ public class DialogRoundedCornerSourceTest {
 
         String baseDialog = Files.readString(Path.of("src/main/java/com/fongmi/android/tv/ui/dialog/BaseAlertDialog.java"), StandardCharsets.UTF_8);
         assertTrue("BaseAlertDialog builder should apply the unified rounded style",
-                baseDialog.contains("new MaterialAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialog_WebHTV_Rounded)"));
+                baseDialog.contains("new WebHtvAlertDialogBuilder(requireActivity(), R.style.MaterialAlertDialog_WebHTV_Rounded)"));
 
         String mobileStyles = Files.readString(Path.of("src/mobile/res/values/styles.xml"), StandardCharsets.UTF_8);
         String leanbackStyles = Files.readString(Path.of("src/leanback/res/values/styles.xml"), StandardCharsets.UTF_8);
         assertTrue("Mobile theme should apply the unified rounded dialog overlay",
-                mobileStyles.contains("<item name=\"materialAlertDialogTheme\">@style/ThemeOverlay.WebHTV.LightDialog</item>"));
+                mobileStyles.contains("<item name=\"materialAlertDialogTheme\">@style/ThemeOverlay.WebHTV.Dialog</item>"));
         assertTrue("Leanback theme should apply the unified rounded dialog overlay",
-                leanbackStyles.contains("<item name=\"materialAlertDialogTheme\">@style/ThemeOverlay.WebHTV.LightDialog</item>"));
+                leanbackStyles.contains("<item name=\"materialAlertDialogTheme\">@style/ThemeOverlay.WebHTV.Dialog</item>"));
     }
 }

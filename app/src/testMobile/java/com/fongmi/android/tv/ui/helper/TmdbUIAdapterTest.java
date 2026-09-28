@@ -725,9 +725,12 @@ public class TmdbUIAdapterTest {
                         && hydrateBody.contains("getTmdbVodContent()")
                         && hydrateBody.contains("mBinding.content.setTag(content);"));
         assertTrue("direct TMDB playback should consume colorful detail's cached TMDB detail for synopsis",
-                source.contains("TmdbDetailCache.take(getIntent().getStringExtra(TmdbDetailCache.EXTRA_KEY), getTmdbItem())")
+                source.contains("TmdbDetailCache.take(getIntent().getStringExtra(TmdbDetailCache.EXTRA_KEY), getTmdbItem(), currentTmdbLanguage())")
                         && source.contains("cachedTmdbOverview(detail)")
-                        && source.contains("cachedTmdbOverviewForLanguage(translations, \"zh-CN\")"));
+                        // The overview now goes through TmdbService's unified language
+                        // policy; the per-call zh-CN fallback chain was replaced by it
+                        // (see TmdbDetailDirectPlayTransitionSourceTest).
+                        && source.contains("translatedOverview(detail, currentTmdbConfig())"));
         assertTrue("fast hydration must keep direct colorful-detail playback on the native right-panel layout",
                 hydrateBody.contains("if (isTmdbMode() && !isIntentTmdbPlayback())")
                         && hydrateBody.contains("mBinding.tmdbOverview.setSingleLine(false);")
@@ -817,8 +820,10 @@ public class TmdbUIAdapterTest {
         Path sourcePath = findMainJavaPath().resolve(Path.of("com", "fongmi", "android", "tv", "ui", "activity", "TmdbDetailActivity.java"));
         String source = new String(Files.readAllBytes(sourcePath), StandardCharsets.UTF_8);
         int method = source.indexOf("private void playDefaultPlayback()");
-        int put = source.indexOf("TmdbDetailCache.put(playbackTmdbItem(), matchedTmdbDetail, detailCastItems)", method);
-        if (put < 0) put = source.indexOf("TmdbDetailCache.put(item, matchedTmdbDetail, detailCastItems)", method);
+        // The cache key carries the request language, so match the call prefix and
+        // tolerate the trailing language argument added by the display-identity fix.
+        int put = source.indexOf("TmdbDetailCache.put(playbackTmdbItem(), matchedTmdbDetail, detailCastItems", method);
+        if (put < 0) put = source.indexOf("TmdbDetailCache.put(item, matchedTmdbDetail, detailCastItems", method);
         int start = source.indexOf("VideoActivity.startDirectTmdb", put);
         int keyArg = source.indexOf("tmdbDetailCacheKey", start);
         int fastTitles = source.indexOf("fastPlaybackEpisodeTitles()", start);

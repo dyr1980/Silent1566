@@ -19,6 +19,7 @@ import com.fongmi.android.tv.bean.Site;
 import com.fongmi.android.tv.bean.TmdbConfig;
 import com.fongmi.android.tv.service.TmdbConfigTestService;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.Task;
 import com.fongmi.android.tv.utils.TmdbProxy;
 import com.google.android.material.chip.Chip;
@@ -175,7 +176,7 @@ public class TmdbSourceDialog {
                 String apiResult = resultText(result.api, R.string.dialog_tmdb_test_api_success, R.string.dialog_tmdb_test_api_failed);
                 String imageResult = resultText(result.image, R.string.dialog_tmdb_test_image_success, R.string.dialog_tmdb_test_image_failed);
                 String omdbResult = resultText(result.omdb, R.string.dialog_tmdb_test_omdb_success, R.string.dialog_tmdb_test_omdb_failed);
-                new MaterialAlertDialogBuilder(dialogContext, R.style.Theme_WebHTV_LightDialog)
+                new WebHtvAlertDialogBuilder(dialogContext, R.style.Theme_WebHTV_Dialog)
                         .setTitle(R.string.dialog_tmdb_test_result_title)
                         .setMessage(apiResult + "\n" + imageResult + "\n" + omdbResult)
                         .setPositiveButton(R.string.dialog_positive, null)
@@ -238,7 +239,7 @@ public class TmdbSourceDialog {
         String current = inputText(input);
         int checked = -1;
         for (int i = 0; i < labels.length; i++) if (labels[i].equals(current)) checked = i;
-        AlertDialog picker = new MaterialAlertDialogBuilder(dialogContext, R.style.Theme_WebHTV_LightDialog)
+        AlertDialog picker = new WebHtvAlertDialogBuilder(dialogContext, R.style.Theme_WebHTV_Dialog)
                 .setTitle(title)
                 .setSingleChoiceItems(labels, checked, (dialog, which) -> {
                     input.setText(labels[which], false);
@@ -320,7 +321,7 @@ public class TmdbSourceDialog {
     }
 
     private MaterialAlertDialogBuilder builder() {
-        return new MaterialAlertDialogBuilder(activity, R.style.Theme_WebHTV_LightDialog);
+        return new WebHtvAlertDialogBuilder(activity, R.style.Theme_WebHTV_Dialog);
     }
 
     private void wireConfigDialogFocus(AlertDialog dialog, EditText ruleInput, View addBtn, EditText disabledRuleInput, View addDisabledBtn, View manageBtn, View resetBtn) {

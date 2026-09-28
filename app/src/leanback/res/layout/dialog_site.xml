@@ -30,8 +30,8 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/text"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_site_search" />
 
@@ -70,7 +70,7 @@
         android:accessibilityLiveRegion="polite"
         android:importantForAccessibility="yes"
         android:text="@string/site_group_sort_tv_hint"
-        android:textColor="@color/text"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="14sp"
         android:visibility="gone" />
 
@@ -116,7 +116,7 @@
                 android:nextFocusDown="@id/search"
                 android:padding="8dp"
                 android:src="@drawable/ic_site_config"
-                app:tint="@color/site_action_icon" />
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/search"
@@ -130,7 +130,7 @@
                 android:nextFocusDown="@id/change"
                 android:padding="8dp"
                 android:src="@drawable/ic_site_search"
-                app:tint="@color/site_action_icon" />
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/change"
@@ -144,7 +144,7 @@
                 android:nextFocusDown="@id/select"
                 android:padding="8dp"
                 android:src="@drawable/ic_site_change"
-                app:tint="@color/site_action_icon" />
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/select"
@@ -158,7 +158,7 @@
                 android:nextFocusDown="@id/cancel"
                 android:padding="8dp"
                 android:src="@drawable/ic_site_select"
-                app:tint="@color/site_action_icon" />
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/cancel"
@@ -172,7 +172,7 @@
                 android:nextFocusDown="@id/mode"
                 android:padding="8dp"
                 android:src="@drawable/ic_site_cancel"
-                app:tint="@color/site_action_icon" />
+                app:tint="?attr/colorOnSurfaceVariant" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mode"
@@ -185,7 +185,7 @@
                 android:nextFocusUp="@id/cancel"
                 android:nextFocusDown="@id/mode"
                 android:padding="8dp"
-                app:tint="@color/site_action_icon"
+                app:tint="?attr/colorOnSurfaceVariant"
                 tools:src="@drawable/ic_site_list" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

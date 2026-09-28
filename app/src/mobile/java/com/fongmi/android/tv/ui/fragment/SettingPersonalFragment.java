@@ -20,6 +20,7 @@ import com.fongmi.android.tv.setting.AutoBackupPolicy;
 import com.fongmi.android.tv.setting.GroupRuleConfig;
 import com.fongmi.android.tv.setting.PlayerSetting;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.activity.AppBrandingActivity;
 import com.fongmi.android.tv.ui.base.BaseFragment;
 import com.fongmi.android.tv.ui.dialog.GroupRuleDialog;
@@ -28,7 +29,6 @@ import com.fongmi.android.tv.ui.dialog.SliderNumberDialog;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.PermissionUtil;
 import com.fongmi.android.tv.utils.Util;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Locale;
 
@@ -224,7 +224,7 @@ public class SettingPersonalFragment extends BaseFragment {
     }
 
     private void showResetAppDialog(View view) {
-        new MaterialAlertDialogBuilder(requireActivity())
+        new WebHtvAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.dialog_reset_app)
                 .setMessage(R.string.dialog_reset_app_data)
                 .setNegativeButton(R.string.dialog_negative, null)

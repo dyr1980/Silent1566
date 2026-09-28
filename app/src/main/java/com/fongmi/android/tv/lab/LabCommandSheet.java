@@ -15,8 +15,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.fongmi.android.tv.App;
 import com.fongmi.android.tv.R;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -362,7 +362,7 @@ public final class LabCommandSheet implements LabRunner.OutputListener {
         progress.setTextColor(Color.WHITE);
         progress.setTextSize(14);
         progress.setPadding(48, 32, 48, 32);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.Theme_App_Lab_Dialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.Theme_App_Lab_Dialog)
                 .setTitle("下载依赖" + (command.download.title == null ? "" : " · " + command.download.title))
                 .setView(progress)
                 .setCancelable(false)

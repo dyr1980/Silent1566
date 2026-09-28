@@ -72,7 +72,7 @@ public final class PlaybackPerformanceDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         PlaybackPerformanceSetting.ensureInitialized();
-        Dialog dialog = new Dialog(requireActivity(), R.style.Theme_WebHTV_LightDialog);
+        Dialog dialog = new Dialog(requireActivity(), R.style.Theme_WebHTV_Dialog);
         dialog.setContentView(createView(LayoutInflater.from(requireContext())));
         return dialog;
     }
@@ -202,7 +202,7 @@ public final class PlaybackPerformanceDialog extends DialogFragment {
             addHelpItem(content, option.title(), option.description());
         }
 
-        Dialog dialog = new Dialog(requireContext(), R.style.Theme_WebHTV_LightDialog);
+        Dialog dialog = new Dialog(requireContext(), R.style.Theme_WebHTV_Dialog);
         dialog.setContentView(root);
         dialog.setCanceledOnTouchOutside(true);
         dialog.setOnShowListener(ignored -> resizeHelpDialog(dialog));

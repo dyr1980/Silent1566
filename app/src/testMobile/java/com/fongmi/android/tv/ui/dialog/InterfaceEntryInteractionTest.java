@@ -94,9 +94,13 @@ public class InterfaceEntryInteractionTest {
         assertTrue(layout.contains("app:backgroundTint=\"@color/dialog_outlined_button_bg\""));
         assertTrue(layout.contains("app:strokeColor=\"@color/dialog_outlined_button_stroke\""));
         assertTrue(layout.contains("app:strokeWidth=\"2dp\""));
-        assertTrue(buttonBackground.contains("android:color=\"#D2E3FC\""));
-        assertTrue(buttonStroke.contains("android:color=\"#C8CDD2\""));
-        assertTrue(buttonStroke.contains("android:color=\"#0B57D0\""));
+        // The unfocused outline must be a real semantic colour, not transparency: the
+        // 2dp stroke above is what makes the config name look clickable before focus.
+        // These selectors are the exact-match channels ThemeBinder rewrites, so they
+        // must resolve through webhtv tokens (see ThemeBinderContractTest).
+        assertTrue(buttonBackground.contains("android:color=\"@color/webhtv_color_primary_container\""));
+        assertTrue(buttonStroke.contains("android:color=\"@color/webhtv_color_outline\""));
+        assertTrue(buttonStroke.contains("android:color=\"@color/webhtv_color_primary\""));
     }
 
     @Test

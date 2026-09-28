@@ -42,6 +42,7 @@ import com.fongmi.android.tv.databinding.FragmentCollectBinding;
 import com.fongmi.android.tv.model.SearchProgress;
 import com.fongmi.android.tv.model.SiteViewModel;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.ThemeController;
 import com.fongmi.android.tv.setting.SiteGroupOrderStore;
 import com.fongmi.android.tv.setting.SiteHealthStore;
 import com.fongmi.android.tv.ui.activity.FolderActivity;
@@ -666,7 +667,7 @@ public class CollectFragment extends BaseFragment implements MenuProvider, Colle
         view.setSingleLine(true);
         view.setGravity(Gravity.CENTER_VERTICAL);
         view.setIncludeFontPadding(false);
-        view.setTextColor(0xFF202124);
+        view.setTextColor(ThemeController.current().colorOnSurface());
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         view.setPadding(ResUtil.dp2px(18), 0, ResUtil.dp2px(18), 0);
         view.setBackgroundResource(getSelectableItemBackground());

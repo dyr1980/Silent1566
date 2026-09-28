@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
 
 import com.fongmi.android.tv.R;
+import com.fongmi.android.tv.theme.ThemeController;
 import com.fongmi.android.tv.ui.helper.TouchOptimizationHelper;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.fongmi.android.tv.utils.Util;
@@ -42,6 +43,9 @@ public final class LightDialog {
         int verticalInset = (int) (dialog.getContext().getResources().getDisplayMetrics().density * 24);
         window.setBackgroundDrawable(new InsetDrawable(background, 0, verticalInset, 0, verticalInset));
         if (Util.isLeanback()) applyAlertWindow(dialog, window);
+        // AlertController installs the message and button views during show(), so the
+        // binder root is registered here and re-walked by descendant-count changes.
+        ThemeController.bindDialog(dialog);
     }
 
     static int resolveAlertWidth(int screenWidth, int screenHeight) {
@@ -129,6 +133,7 @@ public final class LightDialog {
         dialog.setOnShowListener(d -> {
             applyWindow(dialog, context, landFactor, portFactor, maxDp, heightPx);
             TouchOptimizationHelper.sync(dialog);
+            ThemeController.bindDialog(dialog);
         });
         return dialog;
     }
@@ -152,7 +157,7 @@ public final class LightDialog {
         if (title != null) {
             MaterialTextView titleView = new MaterialTextView(context);
             titleView.setText(title);
-            titleView.setTextColor(Color.parseColor("#202124"));
+            titleView.setTextColor(ThemeController.current().colorOnSurface());
             titleView.setTextSize(18);
             titleView.setGravity(Gravity.CENTER_VERTICAL);
             root.addView(titleView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));

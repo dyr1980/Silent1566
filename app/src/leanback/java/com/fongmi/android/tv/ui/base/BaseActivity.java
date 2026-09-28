@@ -25,7 +25,6 @@ import com.fongmi.android.tv.event.RefreshEvent;
 import com.fongmi.android.tv.server.process.ApkUrlPush;
 import com.fongmi.android.tv.setting.Setting;
 import com.fongmi.android.tv.theme.ThemeController;
-import com.fongmi.android.tv.theme.ThemeTokens;
 import com.fongmi.android.tv.ui.custom.CustomWallView;
 import com.fongmi.android.tv.ui.helper.TouchOptimizationHelper;
 import com.fongmi.android.tv.utils.Util;
@@ -51,24 +50,20 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeController.applyNightMode(this);
         super.onCreate(savedInstanceState);
+        ThemeController.applyFromPreferences(this);
         registerFragmentLifecycleCallbacks();
-        setContentView(getBinding().getRoot());
-        if (applyGlobalTheme()) {
-            ThemeController.apply(this);
-            ThemeController.applyLeanback(this);
-        }
+        // getBinding() inflates on every call, so resolve it once: the root that is set as
+        // content must be the same instance that initView()/initEvent() configure.
+        View content = getBinding().getRoot();
+        setContentView(content);
+        ThemeController.bindTheme(content);
         EventBus.getDefault().register(this);
         initView(savedInstanceState);
+        ThemeController.bindTheme(content);
         Util.hideSystemUI(this);
         setBackCallback();
         initEvent();
-        // Some detail/player controls are inflated during initView; bind them after the Activity tree is complete.
-        if (applyGlobalTheme()) {
-            ThemeController.apply(this);
-            ThemeController.applyLeanback(this);
-        }
     }
 
     @Override
@@ -170,17 +165,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSubscribe(Object o) {
-        if (!(o instanceof RefreshEvent event)) return;
-        if (event.getType() == RefreshEvent.Type.THEME && preserveDetailThemeState()) return;
-        if (event.getType() == RefreshEvent.Type.LANGUAGE || event.getType() == RefreshEvent.Type.UI_SCALE || event.getType() == RefreshEvent.Type.THEME) recreate();
-    }
-
-    protected boolean applyGlobalTheme() {
-        return true;
-    }
-
-    protected boolean preserveDetailThemeState() {
-        return false;
+        if (o instanceof RefreshEvent event && (event.getType() == RefreshEvent.Type.LANGUAGE || event.getType() == RefreshEvent.Type.UI_SCALE || event.getType() == RefreshEvent.Type.THEME)) recreate();
     }
 
     @Override
@@ -224,12 +209,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (!(fragment instanceof DialogFragment dialog) || dialog.getDialog() == null) return;
                 Window window = dialog.getDialog().getWindow();
                 if (window == null) return;
-                window.getDecorView().post(() -> {
-                    ThemeTokens tokens = ThemeController.resolve(BaseActivity.this);
-                    ThemeController.apply(window.getDecorView(), tokens);
-                    ThemeController.applyLeanback(window.getDecorView(), tokens);
-                    TouchOptimizationHelper.sync(window.getDecorView());
-                });
+                window.getDecorView().post(() -> TouchOptimizationHelper.sync(window.getDecorView()));
             }
         }, true);
     }

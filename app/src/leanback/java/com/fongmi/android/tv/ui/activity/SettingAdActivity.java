@@ -33,6 +33,7 @@ import com.fongmi.android.tv.service.PlaybackService;
 import com.fongmi.android.tv.player.IntroSkipKinds;
 import com.fongmi.android.tv.setting.Setting;
 import com.fongmi.android.tv.subtitle.RealtimeSubtitleSpeechRecognitionFactory;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.base.BaseActivity;
 import com.fongmi.android.tv.ui.dialog.AdBlockStatsDialog;
 import com.fongmi.android.tv.ui.dialog.AdRuleManageDialog;
@@ -40,7 +41,6 @@ import com.fongmi.android.tv.ui.dialog.LightDialog;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.Task;
 import com.github.catvod.crawler.SpiderDebug;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Locale;
 
@@ -210,7 +210,7 @@ public class SettingAdActivity extends BaseActivity {
     }
 
     private boolean manageAdAudioRules(View view) {
-        new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.setting_ad_audio_title)
                 .setItems(new String[]{
                         getString(R.string.setting_ad_audio_import),
@@ -249,7 +249,7 @@ public class SettingAdActivity extends BaseActivity {
     }
 
     private void confirmClearAdAudioRules() {
-        new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.setting_ad_audio_clear)
                 .setMessage(R.string.setting_ad_audio_clear_confirm)
                 .setPositiveButton(R.string.dialog_positive, (dialog, which) -> Task.execute(() -> {
@@ -287,7 +287,7 @@ public class SettingAdActivity extends BaseActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
         input.setText(AdAudioSetting.getProbeRuleUrl());
         input.setSelection(input.length());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.setting_ad_probe_source)
                 .setMessage(R.string.setting_ad_probe_source_hint)
                 .setView(input)
@@ -382,7 +382,7 @@ public class SettingAdActivity extends BaseActivity {
     }
 
     private void manageSpeechAdRules(View view) {
-        new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.speech_ad_rules_manage)
                 .setItems(new String[]{
                         getString(R.string.speech_ad_rules_edit),
@@ -401,7 +401,7 @@ public class SettingAdActivity extends BaseActivity {
 
     private void showBuiltinSpeechAdRules() {
         try {
-            new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+            new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                     .setTitle(R.string.speech_ad_rules_view_builtin)
                     .setMessage(SpeechAdSetting.builtinRulesText())
                     .setPositiveButton(R.string.dialog_positive, null)
@@ -420,7 +420,7 @@ public class SettingAdActivity extends BaseActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         input.setText(SpeechAdSetting.customRulesText());
         input.setSelection(input.length());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.speech_ad_rules_edit)
                 .setView(input)
                 .setNegativeButton(R.string.dialog_negative, null)
@@ -470,7 +470,7 @@ public class SettingAdActivity extends BaseActivity {
     }
 
     private void confirmClearSpeechAdRules() {
-        new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.speech_ad_rules_clear)
                 .setMessage(R.string.speech_ad_rules_clear_confirm)
                 .setPositiveButton(R.string.dialog_positive, (dialog, which) -> {
@@ -503,7 +503,7 @@ public class SettingAdActivity extends BaseActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         input.setText(String.join("\n", speech.keywords().values()));
         input.setSelectAllOnFocus(false);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.speech_ad_keywords)
                 .setView(input)
                 .setNegativeButton(R.string.dialog_negative, null)
@@ -524,7 +524,7 @@ public class SettingAdActivity extends BaseActivity {
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         input.setSelectAllOnFocus(true);
         input.setText(String.valueOf(SpeechAdSetting.snapshot().skipSeconds()));
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.speech_ad_skip_seconds)
                 .setView(input)
                 .setNegativeButton(R.string.dialog_negative, null)
@@ -555,7 +555,7 @@ public class SettingAdActivity extends BaseActivity {
                 getString(R.string.speech_ad_skip_mode_auto)
         };
         int checked = speech.mode() == AdSkipPolicyController.Mode.AUTO ? 1 : 0;
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this, R.style.Theme_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(this, R.style.Theme_WebHTV_Dialog)
                 .setTitle(R.string.speech_ad_skip_mode)
                 .setNegativeButton(R.string.dialog_negative, null)
                 .setSingleChoiceItems(modes, checked, (shown, which) -> {

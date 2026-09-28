@@ -28,6 +28,7 @@ import com.fongmi.android.tv.setting.InterfaceFailoverState;
 import com.fongmi.android.tv.setting.InterfaceOrderStore;
 import com.fongmi.android.tv.setting.GroupRuleConfig;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.fongmi.android.tv.utils.UrlUtil;
@@ -38,7 +39,6 @@ import com.github.catvod.bean.Proxy;
 import com.github.catvod.crawler.SpiderDebug;
 import com.github.catvod.utils.Json;
 import com.google.gson.JsonObject;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -386,7 +386,7 @@ public class VodConfig extends BaseConfig {
         CharSequence[] labels = new CharSequence[round.candidates.size()];
         for (int i = 0; i < labels.length; i++) labels[i] = round.candidates.get(i).getDesc();
         final int[] selected = {0};
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity)
                 .setTitle(R.string.interface_failover_title)
                 .setMessage(ResUtil.getString(R.string.interface_failover_message, round.originDesc))
                 .setSingleChoiceItems(labels, 0, (dialog1, which) -> selected[0] = which)

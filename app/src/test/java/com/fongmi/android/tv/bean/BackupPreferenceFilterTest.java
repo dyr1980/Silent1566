@@ -86,6 +86,19 @@ public class BackupPreferenceFilterTest {
     }
 
     @Test
+    public void appearanceModeAndThemeProfileFollowSettingsOption() {
+        SyncOptions settingsOnly = new SyncOptions().config(false).spider(false).webHome(false).settings(true);
+        SyncOptions spiderOnly = new SyncOptions().config(false).spider(true).webHome(false).settings(false);
+
+        for (String key : new String[]{
+                "theme_mode", "theme_profile_v2_json",
+                "theme_profile_v2_last_good", "theme_profile_v2_schema"}) {
+            assertTrue(key, Backup.include(key, settingsOnly));
+            assertFalse(key, Backup.include(key, spiderOnly));
+        }
+    }
+
+    @Test
     public void githubProxyPreferencesFollowSettingsOption() {
         SyncOptions settingsOnly = new SyncOptions().config(false).spider(false).webHome(false).settings(true);
         SyncOptions webHomeOnly = new SyncOptions().config(false).spider(false).webHome(true).settings(false);
@@ -183,10 +196,16 @@ public class BackupPreferenceFilterTest {
         SyncOptions settingsOnly = new SyncOptions().config(false).spider(false).webHome(false).settings(true);
         SyncOptions webHomeOnly = new SyncOptions().config(false).spider(false).webHome(true).settings(false);
 
-        assertTrue(Backup.include("theme_profile_json", settingsOnly));
-        assertTrue(Backup.include("theme_profile_last_good", settingsOnly));
-        assertTrue(Backup.include("theme_profile_schema", settingsOnly));
-        assertFalse(Backup.include("theme_profile_json", webHomeOnly));
+        // The B-safe profile is persisted under the v2 keys only: the legacy v1
+        // `theme_profile_*` keys are deliberately never reused, so an old TweakCN
+        // profile can never be misread as a current one.
+        assertTrue(Backup.include("theme_profile_v2_json", settingsOnly));
+        assertTrue(Backup.include("theme_profile_v2_last_good", settingsOnly));
+        assertTrue(Backup.include("theme_profile_v2_schema", settingsOnly));
+        assertTrue(Backup.include("theme_mode", settingsOnly));
+        assertFalse(Backup.include("theme_profile_v2_json", webHomeOnly));
+        assertFalse("the legacy v1 profile key must not come back",
+                Backup.include("theme_profile_json", settingsOnly));
     }
 
     @Test

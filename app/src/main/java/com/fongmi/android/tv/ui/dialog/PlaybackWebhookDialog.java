@@ -28,6 +28,7 @@ import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.databinding.DialogPlaybackWebhookBinding;
 import com.fongmi.android.tv.playback.PlaybackWebhookStore;
 import com.fongmi.android.tv.playback.WebhookConfig;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.custom.CustomTextListener;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.ResUtil;
@@ -91,7 +92,7 @@ public class PlaybackWebhookDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override

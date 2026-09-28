@@ -96,7 +96,7 @@ public class SiteHealthReportSourceTest {
         assertTrue(statsStoreSource.contains("hls.legacy-fallback"));
         assertTrue(statsStoreSource.contains("内置兜底规则"));
         String clearConfirmationBody = methodBody(reportSource, "private void showClearConfirmation(");
-        assertTrue(clearConfirmationBody.contains("R.style.Theme_WebHTV_LightDialog"));
+        assertTrue(clearConfirmationBody.contains("R.style.Theme_WebHTV_Dialog"));
         assertTrue(clearConfirmationBody.contains("LightDialog.apply(dialog)"));
         String refreshBody = methodBody(reportSource, "private void refreshReport()");
         assertTrue(refreshBody.indexOf("report = SiteHealthStore.report()") < refreshBody.indexOf("render()"));

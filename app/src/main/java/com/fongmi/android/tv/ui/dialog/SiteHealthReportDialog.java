@@ -22,6 +22,7 @@ import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.api.config.AdBlockStatsStore;
 import com.fongmi.android.tv.databinding.DialogSiteHealthReportBinding;
 import com.fongmi.android.tv.setting.SiteHealthStore;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -54,7 +55,7 @@ public class SiteHealthReportDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override
@@ -388,7 +389,7 @@ public class SiteHealthReportDialog extends BaseAlertDialog {
     }
 
     private void showClearConfirmation(int titleRes, CharSequence message, Runnable action) {
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity(), R.style.Theme_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(requireActivity(), R.style.Theme_WebHTV_Dialog)
                 .setTitle(titleRes)
                 .setMessage(message)
                 .setNegativeButton(R.string.dialog_negative, null)

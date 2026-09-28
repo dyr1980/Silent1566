@@ -49,6 +49,7 @@ import com.fongmi.android.tv.databinding.AdapterCustomCspBinding;
 import com.fongmi.android.tv.databinding.DialogCustomCspBinding;
 import com.fongmi.android.tv.impl.Callback;
 import com.fongmi.android.tv.setting.CustomCspSetting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.ui.custom.CustomTextListener;
 import com.fongmi.android.tv.ui.custom.SafeScrollEditText;
 import com.fongmi.android.tv.ui.custom.SettingClipboardOverlay;
@@ -135,7 +136,7 @@ public class CustomCspDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override

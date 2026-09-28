@@ -18,7 +18,7 @@
         android:layout_height="52dp"
         android:gravity="center"
         android:text="@string/search_progress"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="18sp"
         tools:text="(12/38)" />
 
@@ -37,7 +37,7 @@
             android:focusableInTouchMode="true"
             android:gravity="center"
             android:text="@string/search_loading"
-            android:textColor="@color/white_80"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="18sp" />
 
         <com.fongmi.android.tv.ui.custom.CustomRecyclerView

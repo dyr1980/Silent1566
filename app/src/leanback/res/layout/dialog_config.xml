@@ -29,7 +29,7 @@
             android:ellipsize="end"
             android:lineSpacingExtra="4dp"
             android:maxLines="3"
-            android:textColor="#3C4043"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="18sp"
             tools:text="@string/push_info" />
 
@@ -43,8 +43,8 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:singleLine="true"
-            android:textColor="#202124"
-            android:textColorHint="#8A8F98"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
             android:textSize="18sp" />
 
         <com.fongmi.android.tv.ui.custom.CustomEditText
@@ -59,8 +59,8 @@
             android:nextFocusDown="@id/addresses"
             android:nextFocusUp="@id/name"
             android:singleLine="true"
-            android:textColor="#202124"
-            android:textColorHint="#8A8F98"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
             android:textSize="18sp" />
 
         <com.fongmi.android.tv.ui.custom.CustomEditText
@@ -76,8 +76,8 @@
             android:minLines="2"
             android:nextFocusDown="@id/choose"
             android:nextFocusUp="@id/text"
-            android:textColor="#202124"
-            android:textColorHint="#8A8F98"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -114,7 +114,7 @@
                 app:autoSizeStepGranularity="1sp"
                 app:autoSizeTextType="uniform"
                 app:backgroundTint="@color/dialog_outlined_button_bg"
-                app:strokeColor="@color/dialog_outlined_button_stroke"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -145,7 +145,7 @@
                 app:autoSizeStepGranularity="1sp"
                 app:autoSizeTextType="uniform"
                 app:backgroundTint="@color/dialog_outlined_button_bg"
-                app:strokeColor="@color/dialog_outlined_button_stroke"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -175,7 +175,7 @@
                 app:autoSizeStepGranularity="1sp"
                 app:autoSizeTextType="uniform"
                 app:backgroundTint="@color/dialog_primary_button_bg"
-                app:strokeColor="@color/dialog_outlined_button_stroke"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -204,7 +204,7 @@
                 app:autoSizeStepGranularity="1sp"
                 app:autoSizeTextType="uniform"
                 app:backgroundTint="@color/dialog_outlined_button_bg"
-                app:strokeColor="@color/dialog_outlined_button_stroke"
+                app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

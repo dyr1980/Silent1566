@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:text="@string/control_display"
-        android:textColor="#F2FFFFFF"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="18sp" />
 
     <com.google.android.flexbox.FlexboxLayout

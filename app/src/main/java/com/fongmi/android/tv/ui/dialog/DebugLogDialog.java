@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.server.Server;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.fongmi.android.tv.utils.Notify;
 import com.github.catvod.crawler.SpiderDebug;
@@ -54,13 +55,13 @@ public final class DebugLogDialog {
         captureNote.setText("标准日志按容量轮转；深度统计只保留数值，不保存画面或声音。");
         captureNote.setTextSize(14); panel.addView(captureNote);
         android.widget.Button mark = new android.widget.Button(activity); mark.setText("标记此刻故障"); mark.setFocusable(true); panel.addView(mark);
-        mark.setOnClickListener(v -> new androidx.appcompat.app.AlertDialog.Builder(activity).setTitle("选择当前现象")
+        mark.setOnClickListener(v -> new WebHtvAlertDialogBuilder(activity).setTitle("选择当前现象")
                 .setItems(com.fongmi.android.tv.player.DiagnosticControls.SYMPTOMS, (d, which) -> {
                     try { com.fongmi.android.tv.player.DiagnosticControls.mark(com.fongmi.android.tv.player.DiagnosticControls.SYMPTOMS[which]); Notify.show("已标记，继续记录后 15 秒"); }
                     catch (RuntimeException error) { Notify.show(error.getMessage()); }
                 }).show());
         android.widget.Button depth = new android.widget.Button(activity); depth.setText("深度统计 60 秒"); depth.setFocusable(true); panel.addView(depth);
-        depth.setOnClickListener(v -> new androidx.appcompat.app.AlertDialog.Builder(activity).setTitle("限时深度统计")
+        depth.setOnClickListener(v -> new WebHtvAlertDialogBuilder(activity).setTitle("限时深度统计")
                 .setMessage("对当前播放做少量低分辨率画面和 PCM 数值统计，不保存图像或声音。到期、切换播放或关闭诊断自动停止。")
                 .setNegativeButton("取消", null).setPositiveButton("开启 60 秒", (d, which) -> {
                     try { com.fongmi.android.tv.player.DiagnosticControls.startDepth(60); Notify.show("限时统计已开启"); }

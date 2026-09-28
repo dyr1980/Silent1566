@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="webhtv_space_1">4dp</dimen>
+    <dimen name="webhtv_space_2">8dp</dimen>
+    <dimen name="webhtv_space_3">12dp</dimen>
+    <dimen name="webhtv_space_4">16dp</dimen>
+    <dimen name="webhtv_space_5">20dp</dimen>
+    <dimen name="webhtv_space_6">24dp</dimen>
+    <dimen name="webhtv_size_icon">24dp</dimen>
+    <dimen name="webhtv_size_button">48dp</dimen>
+    <dimen name="webhtv_size_input_min_height">56dp</dimen>
+    <dimen name="webhtv_size_tv_card_gap">20dp</dimen>
+    <dimen name="webhtv_card_radius_default">8dp</dimen>
+    <dimen name="webhtv_card_radius_large">12dp</dimen>
+    <dimen name="webhtv_size_dialog_corner">22dp</dimen>
+</resources>

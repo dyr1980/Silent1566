@@ -25,6 +25,7 @@ import com.fongmi.android.tv.playback.PlaybackRemoteSyncStore;
 import com.fongmi.android.tv.playback.PlaybackWebhookStore;
 import com.fongmi.android.tv.playback.RemoteSyncConfig;
 import com.fongmi.android.tv.playback.ViewingRecordSyncStore;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -57,7 +58,7 @@ public class ViewingRecordSyncDialog extends BaseAlertDialog {
 
     @Override
     protected MaterialAlertDialogBuilder getBuilder() {
-        return new MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_LightDialog).setView(getBinding().getRoot());
+        return new WebHtvAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_WebHTV_Dialog).setView(getBinding().getRoot());
     }
 
     @Override

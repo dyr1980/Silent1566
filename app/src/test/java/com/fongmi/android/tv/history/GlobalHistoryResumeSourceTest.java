@@ -191,7 +191,7 @@ public class GlobalHistoryResumeSourceTest {
 
         assertTrue(resolver.contains("SiteApi.searchContent(site, history.getVodName(), false, \"1\")"));
         assertTrue(coordinator.contains("ProgressBar"));
-        assertTrue(coordinator.contains("R.style.Theme_WebHTV_LightDialog"));
+        assertTrue(coordinator.contains("R.style.Theme_WebHTV_Dialog"));
         assertTrue(coordinator.contains("setCancelable(false)"));
         assertTrue(coordinator.contains("dismiss(loading)"));
         assertFalse(coordinator.contains("Notify.show(R.string.history_source_searching)"));

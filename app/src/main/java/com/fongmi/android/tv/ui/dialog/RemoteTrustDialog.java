@@ -60,6 +60,7 @@ import com.fongmi.android.tv.remote.RemoteTokens;
 import com.fongmi.android.tv.bean.SyncOptions;
 import com.fongmi.android.tv.server.Server;
 import com.fongmi.android.tv.setting.Setting;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.PermissionUtil;
 import com.fongmi.android.tv.utils.QRCode;
@@ -68,7 +69,6 @@ import com.fongmi.android.tv.utils.Task;
 import com.github.catvod.net.OkHttp;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -123,7 +123,7 @@ public final class RemoteTrustDialog {
 
     public static void show(FragmentActivity activity, Runnable callback) {
         Binding binding = build(activity);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setView(binding.root)
                 .create();
         binding.dialog = dialog;
@@ -477,7 +477,7 @@ public final class RemoteTrustDialog {
         MaterialTextView hint = text(activity, activity.getString(R.string.remote_trust_send_server_hint), 12, "#5F6368", false);
         hint.setPadding(0, dp(activity, 8), 0, 0);
         root.addView(hint, matchWrap());
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setTitle(R.string.remote_trust_send_server_title)
                 .setView(root)
                 .setNegativeButton(R.string.dialog_cancel, null)
@@ -868,7 +868,7 @@ public final class RemoteTrustDialog {
         code.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         root.addView(code, matchWrap());
         root.addView(caption(activity, R.string.remote_trust_bind_code_hint), topMargin(matchWrap(), 8));
-        showModal(new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        showModal(new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setTitle(R.string.remote_trust_bind_local_title)
                 .setView(root)
                 .setNegativeButton(R.string.dialog_cancel, null)
@@ -933,7 +933,7 @@ public final class RemoteTrustDialog {
             return;
         }
         DialogRemoteTrustAddDeviceBinding dialogBinding = DialogRemoteTrustAddDeviceBinding.inflate(LayoutInflater.from(activity));
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setView(dialogBinding.getRoot())
                 .create();
         dialogBinding.negative.setOnClickListener(v -> dialog.dismiss());
@@ -1149,7 +1149,7 @@ public final class RemoteTrustDialog {
         dialogBinding.inputLayout.setHint(activity.getString(hint));
         dialogBinding.input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
         dialogBinding.positive.setText("action.push".equals(type) ? R.string.remote_trust_send_push : R.string.remote_trust_send_search);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setView(dialogBinding.getRoot())
                 .create();
         dialogBinding.negative.setOnClickListener(v -> dialog.dismiss());
@@ -1248,7 +1248,7 @@ public final class RemoteTrustDialog {
         state.contentScroll.addView(state.content, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         root.addView(state.contentScroll, topMargin(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, configContentHeight(activity)), 10));
 
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setView(root)
                 .create();
         state.dialog = dialog;
@@ -2169,7 +2169,7 @@ public final class RemoteTrustDialog {
         DialogRemoteTrustConfirmBinding dialogBinding = DialogRemoteTrustConfirmBinding.inflate(LayoutInflater.from(activity));
         dialogBinding.title.setText(R.string.remote_trust_action_sync);
         dialogBinding.message.setText(activity.getString(R.string.remote_trust_sync_confirm, deviceName(selected.device)));
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setView(dialogBinding.getRoot())
                 .create();
         dialogBinding.negative.setOnClickListener(v -> dialog.dismiss());
@@ -2971,7 +2971,7 @@ public final class RemoteTrustDialog {
         DialogRemoteTrustQrBinding dialogBinding = DialogRemoteTrustQrBinding.inflate(LayoutInflater.from(activity));
         dialogBinding.image.setImageBitmap(QRCode.getLightBitmap(server, 220, 1));
         dialogBinding.value.setText(server);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_LightDialog)
+        AlertDialog dialog = new WebHtvAlertDialogBuilder(activity, R.style.ThemeOverlay_WebHTV_Dialog)
                 .setView(dialogBinding.getRoot())
                 .create();
         dialogBinding.negative.setOnClickListener(v -> dialog.dismiss());

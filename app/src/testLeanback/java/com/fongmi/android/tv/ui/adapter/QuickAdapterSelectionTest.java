@@ -1,5 +1,6 @@
 package com.fongmi.android.tv.ui.adapter;
 
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fongmi.android.tv.App;
+import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.bean.Site;
 import com.fongmi.android.tv.bean.Vod;
 
@@ -59,9 +61,13 @@ public class QuickAdapterSelectionTest {
     @Test
     public void boundCurrentSiteStaysActivatedAndOtherSitesDoNot() {
         App application = App.get();
-        RecyclerView recycler = new RecyclerView(application);
+        // The quick switcher layout resolves its text colours through semantic
+        // ?attr/colorOnSurface, which only exists under the app theme; a bare
+        // application context would fail to inflate it.
+        ContextThemeWrapper themed = new ContextThemeWrapper(application, R.style.Theme_App);
+        RecyclerView recycler = new RecyclerView(themed);
         recycler.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        recycler.setLayoutManager(new LinearLayoutManager(application));
+        recycler.setLayoutManager(new LinearLayoutManager(themed));
 
         QuickAdapter adapter = new QuickAdapter(item -> { });
         adapter.setWidth(300);

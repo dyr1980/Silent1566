@@ -11,15 +11,12 @@ import androidx.leanback.widget.Presenter;
 import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.bean.TmdbPerson;
 import com.fongmi.android.tv.databinding.AdapterTmdbCastBinding;
+import com.fongmi.android.tv.theme.ThemeController;
 import com.fongmi.android.tv.utils.ImgUtil;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.google.android.material.card.MaterialCardView;
 
 public class TmdbCastPresenter extends Presenter {
-
-    private static final int CARD_BACKGROUND = 0xFF16202A;
-    private static final int STROKE_NORMAL = 0x26FFFFFF;
-    private static final int STROKE_FOCUSED = 0xFFFFFFFF;
 
     private final OnClickListener mListener;
 
@@ -63,9 +60,10 @@ public class TmdbCastPresenter extends Presenter {
     }
 
     private void applyFocusStyle(MaterialCardView card, boolean focused) {
+        var tokens = ThemeController.current();
         card.setActivated(focused);
-        card.setCardBackgroundColor(CARD_BACKGROUND);
-        card.setStrokeColor(focused ? STROKE_FOCUSED : STROKE_NORMAL);
+        card.setCardBackgroundColor(tokens.colorSurfaceContainerHigh());
+        card.setStrokeColor(focused ? tokens.colorFocus() : tokens.colorOutlineVariant());
         card.setStrokeWidth(ResUtil.dp2px(focused ? 3 : 1));
         card.setCardElevation(0);
         card.setTranslationZ(0);

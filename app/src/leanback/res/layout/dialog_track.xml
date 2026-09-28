@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp"
             tools:text="選擇字幕" />
 
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:paddingHorizontal="12dp"
             android:text="@string/play_track_secondary_subtitle"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="13sp"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/subtitle_realtime_source_language"
-            android:textColor="@color/white_90"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="16sp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -150,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:textColor="@color/white_70"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="16sp"
             tools:text="English" />
 
@@ -163,7 +163,7 @@
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:paddingBottom="12dp"
-        android:textColor="@color/white_70"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="13sp"
         android:visibility="gone"
         tools:text="AI 正在翻譯：1/3 分塊，約剩 20s"

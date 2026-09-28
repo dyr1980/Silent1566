@@ -33,6 +33,7 @@ import com.fongmi.android.tv.setting.GroupRuleConfig;
 import com.fongmi.android.tv.setting.GroupRuleStore;
 import com.fongmi.android.tv.setting.Setting;
 import com.fongmi.android.tv.setting.SiteNameStore;
+import com.fongmi.android.tv.theme.WebHtvAlertDialogBuilder;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.android.tv.utils.ResUtil;
 import com.fongmi.android.tv.utils.Task;
@@ -592,7 +593,7 @@ public final class GroupRuleDialog {
     }
 
     private MaterialAlertDialogBuilder builder() {
-        return new MaterialAlertDialogBuilder(activity, R.style.Theme_WebHTV_LightDialog);
+        return new WebHtvAlertDialogBuilder(activity, R.style.Theme_WebHTV_Dialog);
     }
 
     private static void wireDpadFocus(View view, View up, View down, View left, View right) {

@@ -91,6 +91,7 @@ public class HomeActivity extends BaseActivity implements NavigationBarView.OnIt
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
         checkAction(intent);
     }
 
@@ -109,10 +110,12 @@ public class HomeActivity extends BaseActivity implements NavigationBarView.OnIt
         mChrome = new WebHomeChromeController(this, mBinding, this, savedInstanceState, WebHomeChromeStartup.restore(mStartupConfig));
         mBinding.getRoot().addOnLayoutChangeListener((view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> checkWindowShape(right - left, bottom - top));
         mBinding.navigation.setOnItemSelectedListener(this);
+        setNavigation();
         PermissionUtil.requestFile(this, allGranted -> PermissionUtil.requestNotify(this));
         FollowingScheduler.ensurePeriodic(this);
         FollowingScheduler.enqueueDueNow(this);
         initFragment(savedInstanceState);
+        if (savedInstanceState == null && getIntent().hasExtra(EXTRA_NAV_POSITION)) checkAction(getIntent());
         initConfig();
     }
 
