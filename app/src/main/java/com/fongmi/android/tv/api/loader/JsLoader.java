@@ -40,7 +40,7 @@ public class JsLoader {
             try {
                 Spider spider = loader.spider(api, BaseLoader.get().dex(jar));
                 spider.siteKey = key;
-                spider.init(App.get(), ext);
+                spider.init(new App.SpiderContextWrapper(App.get()), ext);
                 return spider;
             } catch (Throwable e) {
                 SpiderDebug.log("JsLoader", "JS spider init failed: key=%s api=%s", key, api);
