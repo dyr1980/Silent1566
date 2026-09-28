@@ -3,6 +3,8 @@ package com.fongmi.android.tv;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -125,8 +127,6 @@ public class App extends Application implements Application.ActivityLifecycleCal
     }
 
     private void registerContentHandlers() {
-        // 猫源动作项排最前：它的判定最便宜（只比字符串），且命中就该直接开网页，
-        // 不该让音频/阅读器 handler 先按站点规则把它认走
         com.fongmi.android.tv.content.ContentDispatcher.registerHandler(new com.fongmi.android.tv.content.CatActionContentHandler());
         com.fongmi.android.tv.content.ContentDispatcher.registerHandler(new com.fongmi.android.tv.content.GameContentHandler());
         com.fongmi.android.tv.content.ContentDispatcher.registerHandler(new com.fongmi.android.tv.content.AudioContentHandler());
@@ -207,7 +207,6 @@ public class App extends Application implements Application.ActivityLifecycleCal
         if (resources == null || resourcesLanguage != language) {
             Resources resources = super.getResources();
             Configuration configuration = Setting.wrapLanguage(getBaseContext()).getResources().getConfiguration();
-            // WebView adds its resource package to the framework-owned AssetManager on Android 9.
             resources.updateConfiguration(configuration, resources.getDisplayMetrics());
             this.resources = resources;
             resourcesLanguage = language;
@@ -248,5 +247,191 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
     @Override
     public void onActivityStopped(@NonNull Activity activity) {
+    }
+
+    // ===================== 爬虫 Context 包装类 =====================
+    public static class SpiderContextWrapper extends ContextWrapper {
+
+        private static final String ORIGIN_APP_NAME = "默影视";
+
+        public SpiderContextWrapper(Context base) {
+            super(base);
+        }
+
+        @Override
+        public PackageManager getPackageManager() {
+            return new ProxyPackageManager(super.getPackageManager());
+        }
+
+        private static class ProxyPackageManager extends PackageManager {
+
+            private final PackageManager origin;
+
+            public ProxyPackageManager(PackageManager origin) {
+                this.origin = origin;
+            }
+
+            @Override
+            public ApplicationInfo getApplicationInfo(String packageName, int flags) throws NameNotFoundException {
+                ApplicationInfo info = origin.getApplicationInfo(packageName, flags);
+                info.nonLocalizedLabel = ORIGIN_APP_NAME;
+                info.labelRes = 0;
+                return info;
+            }
+
+            @Override
+            public CharSequence getApplicationLabel(ApplicationInfo info) {
+                return ORIGIN_APP_NAME;
+            }
+
+            @Override
+            public CharSequence getApplicationLabel(String packageName) throws NameNotFoundException {
+                return ORIGIN_APP_NAME;
+            }
+
+            @Override
+            public String[] getPackagesForUid(int uid) { return origin.getPackagesForUid(uid); }
+
+            @Override
+            public int getPackageUid(String packageName, int flags) throws NameNotFoundException { return origin.getPackageUid(packageName, flags); }
+
+            @Override
+            public android.content.pm.PackageInfo getPackageInfo(String packageName, int flags) throws NameNotFoundException { return origin.getPackageInfo(packageName, flags); }
+
+            @Override
+            public android.content.pm.PackageInfo getPackageInfo(android.net.Uri packageUri, int flags) throws NameNotFoundException { return origin.getPackageInfo(packageUri, flags); }
+
+            @Override
+            public android.content.pm.PackageInfo getPackageInfo(int uid, int flags) throws NameNotFoundException { return origin.getPackageInfo(uid, flags); }
+
+            @Override
+            public android.content.pm.PackageInfo[] getInstalledPackages(int flags) { return origin.getInstalledPackages(flags); }
+
+            @Override
+            public android.content.pm.PackageInfo[] getInstalledPackages(int flags, int userId) { return origin.getInstalledPackages(flags, userId); }
+
+            @Override
+            public ApplicationInfo[] getInstalledApplications(int flags) { return origin.getInstalledApplications(flags); }
+
+            @Override
+            public ApplicationInfo[] getInstalledApplications(int flags, int userId) { return origin.getInstalledApplications(flags, userId); }
+
+            @Override
+            public android.content.pm.ResolveInfo resolveActivity(android.content.Intent intent, int flags) { return origin.resolveActivity(intent, flags); }
+
+            @Override
+            public java.util.List<android.content.pm.ResolveInfo> queryIntentActivities(android.content.Intent intent, int flags) { return origin.queryIntentActivities(intent, flags); }
+
+            @Override
+            public java.util.List<android.content.pm.ResolveInfo> queryIntentActivityOptions(android.content.ComponentName caller, android.content.Intent[] specifics, android.content.Intent intent, int flags) { return origin.queryIntentActivityOptions(caller, specifics, intent, flags); }
+
+            @Override
+            public java.util.List<android.content.pm.ResolveInfo> queryIntentReceivers(android.content.Intent intent, int flags) { return origin.queryIntentReceivers(intent, flags); }
+
+            @Override
+            public android.content.pm.ResolveInfo resolveService(android.content.Intent intent, int flags) { return origin.resolveService(intent, flags); }
+
+            @Override
+            public java.util.List<android.content.pm.ResolveInfo> queryIntentServices(android.content.Intent intent, int flags) { return origin.queryIntentServices(intent, flags); }
+
+            @Override
+            public java.util.List<android.content.pm.ResolveInfo> queryIntentContentProviders(android.content.Intent intent, int flags) { return origin.queryIntentContentProviders(intent, flags); }
+
+            @Override
+            public android.content.ComponentName getHomeActivities(java.util.List<android.content.pm.ResolveInfo> outActivities) { return origin.getHomeActivities(outActivities); }
+
+            @Override
+            public android.content.pm.ProviderInfo getProviderInfo(android.content.ComponentName component, int flags) throws NameNotFoundException { return origin.getProviderInfo(component, flags); }
+
+            @Override
+            public android.content.pm.ServiceInfo getServiceInfo(android.content.ComponentName component, int flags) throws NameNotFoundException { return origin.getServiceInfo(component, flags); }
+
+            @Override
+            public android.content.pm.ActivityInfo getActivityInfo(android.content.ComponentName component, int flags) throws NameNotFoundException { return origin.getActivityInfo(component, flags); }
+
+            @Override
+            public android.content.pm.PackageInfo getPackageArchiveInfo(String archiveFilePath, int flags) { return origin.getPackageArchiveInfo(archiveFilePath, flags); }
+
+            @Override
+            public android.graphics.drawable.Drawable getApplicationIcon(String packageName) throws NameNotFoundException { return origin.getApplicationIcon(packageName); }
+
+            @Override
+            public android.graphics.drawable.Drawable getApplicationIcon(ApplicationInfo info) { return origin.getApplicationIcon(info); }
+
+            @Override
+            public android.graphics.drawable.Drawable getActivityIcon(android.content.ComponentName component) throws NameNotFoundException { return origin.getActivityIcon(component); }
+
+            @Override
+            public android.graphics.drawable.Drawable getActivityIcon(android.content.Intent intent) throws NameNotFoundException { return origin.getActivityIcon(intent); }
+
+            @Override
+            public android.graphics.drawable.Drawable getActivityBanner(android.content.ComponentName component) throws NameNotFoundException { return origin.getActivityBanner(component); }
+
+            @Override
+            public android.graphics.drawable.Drawable getApplicationBanner(String packageName) throws NameNotFoundException { return origin.getApplicationBanner(packageName); }
+
+            @Override
+            public android.graphics.drawable.Drawable getApplicationBanner(ApplicationInfo info) { return origin.getApplicationBanner(info); }
+
+            @Override
+            public void setComponentEnabledSetting(android.content.ComponentName componentName, int newState, int flags) { origin.setComponentEnabledSetting(componentName, newState, flags); }
+
+            @Override
+            public int getComponentEnabledSetting(android.content.ComponentName componentName) { return origin.getComponentEnabledSetting(componentName); }
+
+            @Override
+            public void setApplicationEnabledSetting(String packageName, int newState, int flags) { origin.setApplicationEnabledSetting(packageName, newState, flags); }
+
+            @Override
+            public int getApplicationEnabledSetting(String packageName) { return origin.getApplicationEnabledSetting(packageName); }
+
+            @Override
+            public boolean isSafeMode() { return origin.isSafeMode(); }
+
+            @Override
+            public void addPackageToPreferred(String packageName) { origin.addPackageToPreferred(packageName); }
+
+            @Override
+            public void removePackageFromPreferred(String packageName) { origin.removePackageFromPreferred(packageName); }
+
+            @Override
+            public java.util.List<android.content.pm.PackageInfo> getPreferredPackages(int flags) { return origin.getPreferredPackages(flags); }
+
+            @Override
+            public void addPreferredActivity(android.content.IntentFilter filter, int match, android.content.ComponentName[] set, android.content.ComponentName activity) { origin.addPreferredActivity(filter, match, set, activity); }
+
+            @Override
+            public void replacePreferredActivity(android.content.IntentFilter filter, int match, android.content.ComponentName[] set, android.content.ComponentName activity) { origin.replacePreferredActivity(filter, match, set, activity); }
+
+            @Override
+            public void clearPackagePreferredActivities(String packageName) { origin.clearPackagePreferredActivities(packageName); }
+
+            @Override
+            public int getPreferredActivities(java.util.List<android.content.IntentFilter> outFilters, java.util.List<android.content.ComponentName> outActivities, String packageName) { return origin.getPreferredActivities(outFilters, outActivities, packageName); }
+
+            @Override
+            public android.content.pm.PackageInfo getInstalledPackageInfo(String packageName) throws NameNotFoundException { return origin.getInstalledPackageInfo(packageName); }
+
+            @Override
+            public void verifyPackageInstaller(String packageName) throws NameNotFoundException { origin.verifyPackageInstaller(packageName); }
+
+            @Override
+            public boolean isPackageAvailable(String packageName) { return origin.isPackageAvailable(packageName); }
+
+            @Override
+            public java.util.List<android.content.pm.PackageInfo> getUninstalledPackages(int flags) { return origin.getUninstalledPackages(flags); }
+
+            @Override
+            public android.content.pm.PackageInfo getPackageInfoAsUser(String packageName, int flags, int userId) throws NameNotFoundException { return origin.getPackageInfoAsUser(packageName, flags, userId); }
+
+            @Override
+            public ApplicationInfo getApplicationInfoAsUser(String packageName, int flags, int userId) throws NameNotFoundException { return origin.getApplicationInfoAsUser(packageName, flags, userId); }
+
+            @Override
+            public android.content.pm.PackageInfo getPackageInfo(int uid, int flags, int userId) throws NameNotFoundException { return origin.getPackageInfo(uid, flags, userId); }
+
+            @Override
+            public ApplicationInfo getApplicationInfo(int uid, int flags, int userId) throws NameNotFoundException { return origin.getApplicationInfo(uid, flags, userId); }
+        }
     }
 }
